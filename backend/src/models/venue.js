@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const { validateHour, validateStringLength } = require('./validators');
 const addressSchema = require('./address');
-const { createCounter } = require('../modules/venue/remote_counters/client');
 
 const validateNameLength = validateStringLength(250);
 
@@ -172,11 +171,6 @@ const venueSchema = new mongoose.Schema({
     required: true,
     enum: ['shop', 'restaurant', 'bar', 'sport'],
   },
-});
-/* eslint-disable-next-line  prefer-arrow-callback */
-venueSchema.post('save', function (doc, next) {
-  createCounter(doc._id);
-  next();
 });
 
 const Venue = mongoose.model('Venue', venueSchema, 'venues');

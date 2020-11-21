@@ -13,6 +13,9 @@ const typeDefs = gql`
           geoCode: String,
           venueType: venueTypes!
       ): Venue
+      deleteVenue (
+          id: ID!
+      ): String!
   }
   type Venue {
       id: ID!

@@ -7,6 +7,14 @@ const isBusiness = rule()(async (parent, args, { user }) => {
   return false;
 });
 
+const isOwner = rule()(async (parent, args, { user }) => {
+  if (!user) {
+    return false;
+  }
+  console.log(args);
+  return true;
+});
 module.exports = {
   isBusiness,
+  isOwner,
 };

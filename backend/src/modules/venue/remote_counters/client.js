@@ -7,9 +7,15 @@ const createCounter = (storeID) => {
   });
 };
 
+const deleteCounter = (storeID) => {
+  console.log(storeID);
+  db.ref(`stores/${storeID}`).remove().catch((err) => console.log(err));
+};
+
 const getCounter = (storeID) => db.ref(`stores/${storeID}/visitors`);
 
 module.exports = {
   createCounter,
+  deleteCounter,
   getCounter,
 };
