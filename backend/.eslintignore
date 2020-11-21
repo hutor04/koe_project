@@ -1,0 +1,4 @@
+**/*.spec.js
+**/*.e2e.js
+**/*.test.js
+node_modules/
