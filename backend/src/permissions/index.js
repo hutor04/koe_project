@@ -1,10 +1,19 @@
-const { shield } = require('graphql-shield');
-const { isBusiness } = require('./rules');
+const { shield, allow } = require('graphql-shield');
+const { isBusiness, isOwner } = require('./rules');
 
-const index = shield({
+const permissions = shield({
+  Query: {
+    listOwnVenues: isBusiness,
+    venues: allow,
+    me: allow,
+  },
   Mutation: {
     createVenue: isBusiness,
+    deleteVenue: isOwner,
+    updateVenue: isOwner,
   },
+}, {
+  fallbackRule: allow,
 });
 
-module.exports = index;
+module.exports = permissions;

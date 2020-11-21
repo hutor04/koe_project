@@ -8,8 +8,7 @@ const createCounter = (storeID) => {
 };
 
 const deleteCounter = (storeID) => {
-  console.log(storeID);
-  db.ref(`stores/${storeID}`).remove().catch((err) => console.log(err));
+  db.ref(`stores/${storeID}`).remove();
 };
 
 const getCounter = (storeID) => db.ref(`stores/${storeID}/visitors`);

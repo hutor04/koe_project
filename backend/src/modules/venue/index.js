@@ -3,19 +3,35 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   extend type Mutation {
       createVenue (
-          name: String!,
-          legalName: String,
-          logo: String,
-          address: AddressInput!,
-          phoneNumber: String,
-          maxCapacity: Int!,
-          hours: HoursInput,
-          geoCode: String,
+          name: String!
+          legalName: String
+          logo: String
+          address: AddressInput!
+          phoneNumber: String
+          maxCapacity: Int!
+          hours: HoursInput
+          geoCode: String
           venueType: venueTypes!
       ): Venue
       deleteVenue (
           id: ID!
       ): String!
+      updateVenue (
+          id: ID!
+          name: String!
+          legalName: String
+          logo: String
+          address: AddressInput!
+          phoneNumber: String
+          maxCapacity: Int!
+          hours: HoursInput
+          geoCode: String
+          venueType: venueTypes!
+      ): Venue
+  }
+  extend type Query {
+      listOwnVenues: [Venue]!
+      venues: [Venue]!
   }
   type Venue {
       id: ID!
