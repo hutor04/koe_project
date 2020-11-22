@@ -28,10 +28,18 @@ const typeDefs = gql`
           geoCode: String
           venueType: venueTypes!
       ): Venue
+      updateVenueCounter (
+          id: ID!
+          delta: Delta!
+      ): Int
   }
   extend type Query {
       listOwnVenues: [Venue]!
-      venues: [Venue]!
+      venues (
+        id: ID
+        name: String
+        street: String
+      ): [Venue]!
   }
   type Venue {
       id: ID!
@@ -92,6 +100,10 @@ const typeDefs = gql`
     restaurant
     bar
     sport
+  }
+  enum Delta {
+      increment
+      decrement
   }
 `;
 

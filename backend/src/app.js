@@ -7,6 +7,7 @@ const schema = require('./modules');
 const permissions = require('./permissions');
 
 const server = new ApolloServer({
+  // schema,
   schema: applyMiddleware(schema, permissions),
   context: async ({ req }) => ({
     user: await context.getUser(req),
