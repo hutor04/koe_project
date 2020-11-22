@@ -11,6 +11,7 @@ const permissions = shield({
     createVenue: isBusiness,
     deleteVenue: isOwner,
     updateVenue: isOwner,
+    updateVenueCounter: isOwner,
   },
 }, {
   fallbackRule: allow,

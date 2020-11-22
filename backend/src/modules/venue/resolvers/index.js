@@ -3,6 +3,7 @@ const deleteVenue = require('./delete');
 const updateVenue = require('./update');
 const listOwnVenues = require('./listOwnVenues');
 const venues = require('./venues');
+const updateVenueCounter = require('./updateVenueCouonter');
 
 const resolvers = {
   Query: {
@@ -13,6 +14,7 @@ const resolvers = {
     createVenue,
     deleteVenue,
     updateVenue,
+    updateVenueCounter,
   },
 };
 
