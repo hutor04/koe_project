@@ -12,6 +12,10 @@ const updateVenueCounter = async (_, { id, delta }) => {
     result = currentVal + 1;
     updateCounter(id, result);
   }
+  if (delta.toString() === 'reset') {
+    result = 0;
+    updateCounter(id, 0);
+  }
   return result;
 };
 

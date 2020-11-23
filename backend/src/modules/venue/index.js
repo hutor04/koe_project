@@ -104,6 +104,7 @@ const typeDefs = gql`
   enum Delta {
       increment
       decrement
+      reset
   }
 `;
 
