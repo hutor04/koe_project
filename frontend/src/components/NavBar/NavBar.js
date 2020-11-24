@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import mainLogo from "../../imgs/logo_koe.png";
 
@@ -16,11 +17,11 @@ function NavBar(){
         Kø
       </Navbar.Brand>
       <Nav className="mr-auto">
-        <Nav.Link href="#home">Home</Nav.Link>
-        <Nav.Link href="#about">About</Nav.Link>
+          <Nav.Link as={Link} to='/'>Home</Nav.Link>
+          <Nav.Link as={Link} to='/about'>About</Nav.Link>
       </Nav>
       <Nav>
-        <Nav.Link href="#login">Login</Nav.Link>
+        <Nav.Link as={Link} to='/login'>Login</Nav.Link>
       </Nav>
     </Navbar>
   );
