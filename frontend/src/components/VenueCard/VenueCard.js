@@ -1,10 +1,12 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Image} from 'react-bootstrap';
 
-function VenueCard(props) {
+function VenueCard({ logo, name }) {
+  const logoPath = logo ? `images/logos/${logo}` : '';
   return (
-    <Card className={'mt-2'}>
-      <Card.Body>{props.name}</Card.Body>
+    <Card className={'mt-2 flex-row flex-wrap'}>
+      <Image src={logoPath} style={{ width: "50px", height: "50px", margin: "5px" }} rounded />
+      <Card.Body>{name}</Card.Body>
     </Card>
   );
 }

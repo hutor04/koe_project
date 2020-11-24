@@ -93,11 +93,11 @@ const typeDefs = gql`
       close: String
   }
   type File {
-      _id: ID!
-      path: String!
-      filename: String!
-      mimetype: String!
-      encoding: String!
+      _id: ID
+      path: String
+      filename: String
+      mimetype: String
+      encoding: String
   }
   input OpenCloseInput {
       open: String
