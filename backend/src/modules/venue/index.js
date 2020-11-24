@@ -1,11 +1,12 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+  scalar Upload
   extend type Mutation {
       createVenue (
           name: String!
           legalName: String
-          logo: String
+          logo: Upload
           address: AddressInput!
           phoneNumber: String
           maxCapacity: Int!
@@ -20,7 +21,7 @@ const typeDefs = gql`
           id: ID!
           name: String!
           legalName: String
-          logo: String
+          logo: Upload
           address: AddressInput!
           phoneNumber: String
           maxCapacity: Int!
@@ -45,7 +46,7 @@ const typeDefs = gql`
       id: ID!
       name: String!
       legalName: String
-      logo: String
+      logo: File
       address: Address!
       phoneNumber: String
       maxCapacity: Int!
@@ -90,6 +91,13 @@ const typeDefs = gql`
   type OpenClose {
       open: String
       close: String
+  }
+  type File {
+      _id: ID!
+      path: String!
+      filename: String!
+      mimetype: String!
+      encoding: String!
   }
   input OpenCloseInput {
       open: String

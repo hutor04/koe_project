@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { allVenues } from '../client/queries/venues';
+import { allVenues } from '../client/api/queries/venues';
 
 function VenuesList() {
   const { loading, error, data } = useQuery(allVenues);

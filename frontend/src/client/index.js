@@ -1,15 +1,7 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import firebase from 'firebase';
-import config from '../config';
+import client from './api/api-client';
+import fireBase from './firebase/firebase-client';
 
-export const client = new ApolloClient({
-  uri: config.api,
-  cache: new InMemoryCache(),
-});
-
-const initfireBase = () => {
-  firebase.initializeApp(config.firebaseConf);
-  return firebase.database();
+export {
+  client,
+  fireBase,
 };
-
-export const fireBase = initfireBase();

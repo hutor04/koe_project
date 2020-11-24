@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { Venue } = require('../../../models/venue');
 const { createCounter } = require('../remote_counters/client');
+const addFile = require('./addFile');
 
 const createVenue = async (_, {
   name,
@@ -16,6 +17,10 @@ const createVenue = async (_, {
   if (!user) {
     throw new AuthenticationError('You are not authenticated!');
   }
+  let logoFile;
+  if (logo) {
+    logoFile = await addFile(logo[0]);
+  }
   // eslint-disable-next-line no-useless-catch
   try {
     const venue = await Venue.create({
@@ -23,7 +28,7 @@ const createVenue = async (_, {
       owner: user._id,
       name,
       legalName,
-      logo,
+      logo: logoFile,
       address,
       phoneNumber,
       maxCapacity,
