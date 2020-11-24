@@ -11,6 +11,7 @@ import NavBar from '../NavBar/NavBar';
 import PageHome from '../PageHome/PageHome';
 import PageAbout from '../PageAbout/PageAbout';
 import PageLogin from '../PageLogin/PageLogin';
+import PageSignUp from '../PageSignUp/PageSignUp';
 import './app.scss';
 import Footer from '../Footer/Footer';
 
@@ -26,6 +27,9 @@ function App() {
             </Route>
             <Route path="/login">
               <PageLogin />
+            </Route>
+            <Route path="/signup">
+              <PageSignUp />
             </Route>
             <Route path="/">
               <PageHome />
