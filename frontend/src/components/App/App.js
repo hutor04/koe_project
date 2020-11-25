@@ -12,6 +12,7 @@ import PageHome from '../PageHome/PageHome';
 import PageAbout from '../PageAbout/PageAbout';
 import PageLogin from '../PageLogin/PageLogin';
 import PageSignUp from '../PageSignUp/PageSignUp';
+import PageProfile from '../PageProfile/PageProfile';
 import './app.scss';
 import Footer from '../Footer/Footer';
 
@@ -34,8 +35,10 @@ function App() {
             <Route path="/">
               <PageHome />
             </Route>
+            <Route path="/profile">
+              <PageProfile />
+            </Route>
           </Switch>
-
           <Footer />
         </Container>
       </Router>
