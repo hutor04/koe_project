@@ -18,13 +18,8 @@ const SignUp = () => {
     const [ newError, setNewError] = useState('');
     const history = useHistory();
     
-    const [signingUp, { loading, error, data}] = useMutation(signup)
+    const [signingUp, { loading, error}] = useMutation(signup)
     const [loggingIn] = useMutation(login);
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
-    if (data) {
-      console.log(data);
-    };
 
     const dropDownHandler = e => {
         setUserTypeEl(e.target.value);
@@ -32,6 +27,7 @@ const SignUp = () => {
 
     const submitHandler = e => {
         e.preventDefault();
+        setShow(true);
         if( passwordEl.current.value !== confirmPasswordEl.current.value) {
             return setNewError('Passwords do not match')
         }
@@ -56,11 +52,12 @@ const SignUp = () => {
             })
             .then(()=> temp= {})
             .then(()=> {history.push("/home")})
-            .then(()=> {dispatch({type:"LOGIN_SUCCESS", payload: localStorage.getItem('token')})})
+            .then(()=> {dispatch({type:"LOGIN_SUCCESS", payload: localStorage.getItem('user')})})
             .catch(err => console.log(err));
 
         }).catch(err => console.log('top error', err));
     };
+    const [show, setShow] = useState(true);
     return (
     <Container className="d-flex align-items-center justify-content-center"
     style={{ minHeight: "100vh"}}>
@@ -69,7 +66,13 @@ const SignUp = () => {
             <Card>
                 <Card.Body>
                     <h2 className="text-center mb-4">Sign Up</h2>
-                    {newError && <Alert variant="danger">{newError}</Alert>}
+                    {error ? 
+                    <Alert variant="danger" show={show}>{error.message}
+                    <Button onClick={() => setShow(false)} variant="outline-danger">
+                        x
+                        </Button>
+                    </Alert>: ''}
+                    {newError && <Alert variant="danger" dismissible>{newError}</Alert>}
                     <Form onSubmit={submitHandler}>
                         <Form.Group id="first-name">
                             <Form.Label>First Name</Form.Label>
@@ -98,7 +101,7 @@ const SignUp = () => {
                                 <option eventKey="Admin" value="Admin">Admin</option>
                         </Form.Control>
                         </Form.Group>
-                        <Button className="w-100 mt-2" type="submit">Sign Up</Button>
+                        <Button className="w-100 mt-2" type="submit">{loading ? 'Loading…' : 'Sign Up'}</Button>
                     </Form>
                 </Card.Body>
             </Card>

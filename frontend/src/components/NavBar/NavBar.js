@@ -8,11 +8,11 @@ function NavBar() {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch();
   const history = useHistory();
-  
+
   const navHandler = e => {
     e.preventDefault();
     localStorage.clear();
-    dispatch({type:"LOGOUT", payload: localStorage.getItem('user')});
+    dispatch({type:"LOGOUT", payload: localStorage.getItem('token')});
     history.push("/login")
   }
 

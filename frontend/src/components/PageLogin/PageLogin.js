@@ -9,7 +9,6 @@ import { useSelector, useDispatch } from 'react-redux';
 const PageLogin = () => {
     const user = useSelector(state => state)
     const dispatch = useDispatch();
-    console.log('user1', user);
 
     const history = useHistory();
     const emailEl = React.createRef();
@@ -25,19 +24,15 @@ const PageLogin = () => {
     loggingIn({ variables: { email: email, password: password}})
     .then(data => {
         const userData = data;
-        localStorage.setItem('user', JSON.stringify(userData.data.login.user))
+        localStorage.setItem('user', JSON.stringify(userData.data.login))
         localStorage.setItem('token', userData.data.login.token);
         localStorage.setItem('tokenExpiration', userData.data.login.tokenExpiration)
     })
     .then(()=> {dispatch({type:"LOGIN_SUCCESS", payload: localStorage.getItem('user')})})
-    .then(()=> {{console.log('user2', user); history.push("/home")}})
+    .then(()=> {history.push("/home")})
     .catch(err => console.log(err));
     }
     const [loggingIn, { loading, error }] = useMutation(login);
-    if (loading) return <p>Loading...</p>;
-    if (error) {
-        console.log(error);
-    }
     return (
       <Container className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "100vh"}}>
@@ -45,8 +40,8 @@ const PageLogin = () => {
         <>
             <Card>
                 <Card.Body>
-                {user ? <Alert variant="primary">You have been logged out.</Alert>: ''}
-                {error ? <Alert variant="danger">Your email or password was incorrect.</Alert>: ''}
+                {user.isLoggedOut ? <Alert variant="primary">You have been logged out.</Alert>: ''}
+                {error ? <Alert variant="danger" dismissible >Your email or password was incorrect.</Alert>: ''}
                 <h2 className="text-center mb-4">Log In</h2>
                     <Form onSubmit={SubmitHandler}>
                         <Form.Group id="email">
@@ -57,7 +52,7 @@ const PageLogin = () => {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" ref={passwordEl} required></Form.Control>
                         </Form.Group>
-                <Button type="submit" className="w-100 mt-2">Submit</Button>
+                <Button type="submit" className="w-100 mt-2">{loading ? 'Loading…' : 'Submit'}</Button>
                     </Form>
                 </Card.Body>
             </Card>                

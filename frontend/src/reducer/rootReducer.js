@@ -42,7 +42,8 @@ import {
         return {
           ...state,
           isLoggedIn: false,
-          user: null,
+          isLoggedOut: true,
+          user: action.payload,
         };
       default:
         return state;
