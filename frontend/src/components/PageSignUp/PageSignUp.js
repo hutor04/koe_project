@@ -1,10 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { useMutation } from '@apollo/client';
 import { signup } from '../../client/api/queries/signup';
-import {Link} from 'react-router-dom';
+import { login } from '../../client/api/queries/login';
+import {Link, useHistory} from 'react-router-dom';
 import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
+import {UserContext} from '../../context/UserContext'
 
 const SignUp = () => {
+    const { user, setUser } = useContext(UserContext);
     const emailEl = React.createRef();
     const passwordEl = React.createRef();
     const firstNameEl= React.createRef();
@@ -12,8 +15,10 @@ const SignUp = () => {
     const  [userTypeEl, setUserTypeEl] = useState("user");
     const confirmPasswordEl = React.createRef();
     const [ newError, setNewError] = useState('');
+    const history = useHistory();
     
     const [signingUp, { loading, error, data}] = useMutation(signup)
+    const [loggingIn] = useMutation(login);
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
     if (data) {
@@ -29,13 +34,31 @@ const SignUp = () => {
         if( passwordEl.current.value !== confirmPasswordEl.current.value) {
             return setNewError('Passwords do not match')
         }
+        let temp = {
+            email: emailEl.current.value,
+            password:passwordEl.current.value
+        }
         signingUp({ variables: { 
             email: emailEl.current.value,
             password: passwordEl.current.value,
             firstName: firstNameEl.current.value,
             lastName: lastNameEl.current.value,
             userType: userTypeEl.toLowerCase()
-        }}).catch(err => console.log('top error', err));
+        }})
+        .then(()=> { 
+            loggingIn({ variables: { email: temp.email, password: temp.password}})
+            .then(data => {
+                const userData = data;
+                localStorage.setItem('user', userData.data.login.user)
+                localStorage.setItem('token', userData.data.login.token);
+                localStorage.setItem('tokenExpiration', userData.data.login.tokenExpiration)
+            })
+            .then(()=> temp= {})
+            .then(()=> {history.push("/home")})
+            .then(()=> {setUser(localStorage.getItem('token'))})
+            .catch(err => console.log(err));
+
+        }).catch(err => console.log('top error', err));
     };
     return (
     <Container className="d-flex align-items-center justify-content-center"

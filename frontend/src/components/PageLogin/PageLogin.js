@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
 import { login } from '../../client/api/queries/login';
@@ -8,7 +8,6 @@ import {UserContext} from '../../context/UserContext'
 
 const PageLogin = () => {
     const { user, setUser } = useContext(UserContext);
-
     if (user) {
         localStorage.clear();
         setUser(localStorage.getItem('token'));
@@ -17,9 +16,6 @@ const PageLogin = () => {
     const history = useHistory();
     const emailEl = React.createRef();
     const passwordEl = React.createRef();
-    const [loggingIn, { loading, error, data }] = useMutation(login);
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :( {console.log(error)}</p>;
 
     const SubmitHandler = e => {
         e.preventDefault();
@@ -35,10 +31,14 @@ const PageLogin = () => {
         localStorage.setItem('token', userData.data.login.token);
         localStorage.setItem('tokenExpiration', userData.data.login.tokenExpiration)
     })
-    .then(setUser(localStorage.getItem('token')))
-    .then(history.push("/home"))
+    .then(()=> {history.push("/home")})
+    .then(()=> {setUser(localStorage.getItem('token'))})
     .catch(err => console.log(err));
-    
+    }
+    const [loggingIn, { loading, error }] = useMutation(login);
+    if (loading) return <p>Loading...</p>;
+    if (error) {
+        console.log(error);
     }
     return (
       <Container className="d-flex align-items-center justify-content-center"
@@ -48,6 +48,7 @@ const PageLogin = () => {
             <Card>
                 <Card.Body>
                 {user ? <Alert variant="primary">You have been logged out.</Alert>: ''}
+                {error ? <Alert variant="danger">Your email or password was incorrect.</Alert>: ''}
                 <h2 className="text-center mb-4">Log In</h2>
                     <Form onSubmit={SubmitHandler}>
                         <Form.Group id="email">
