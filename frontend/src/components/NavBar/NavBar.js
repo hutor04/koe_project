@@ -8,6 +8,7 @@ function NavBar() {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch();
   const history = useHistory();
+  
   const navHandler = e => {
     e.preventDefault();
     localStorage.clear();

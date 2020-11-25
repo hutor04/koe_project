@@ -7,8 +7,9 @@ import { Container, Alert } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
 const PageLogin = () => {
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state)
     const dispatch = useDispatch();
+    console.log('user1', user);
 
     const history = useHistory();
     const emailEl = React.createRef();
@@ -28,8 +29,8 @@ const PageLogin = () => {
         localStorage.setItem('token', userData.data.login.token);
         localStorage.setItem('tokenExpiration', userData.data.login.tokenExpiration)
     })
-    .then(()=> {dispatch({type:"LOGIN", payload: localStorage.getItem('user')})})
-    .then(()=> {history.push("/home")})
+    .then(()=> {dispatch({type:"LOGIN_SUCCESS", payload: localStorage.getItem('user')})})
+    .then(()=> {{console.log('user2', user); history.push("/home")}})
     .catch(err => console.log(err));
     }
     const [loggingIn, { loading, error }] = useMutation(login);

@@ -56,7 +56,7 @@ const SignUp = () => {
             })
             .then(()=> temp= {})
             .then(()=> {history.push("/home")})
-            .then(()=> {dispatch({type:"LOGIN", payload: localStorage.getItem('token')})})
+            .then(()=> {dispatch({type:"LOGIN_SUCCESS", payload: localStorage.getItem('token')})})
             .catch(err => console.log(err));
 
         }).catch(err => console.log('top error', err));
