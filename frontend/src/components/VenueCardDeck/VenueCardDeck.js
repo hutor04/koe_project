@@ -12,7 +12,13 @@ function VenueCardDeck() {
   const venuesList = data.venues.map(venue => {
     return (
       <Row key={venue.is} xs={1}>
-        <VenueCard name={venue.name} logo={venue.logo._id}/>
+        <VenueCard
+          id={venue.id}
+          name={venue.name}
+          logo={venue.logo._id}
+          maxCapacity={venue.maxCapacity}
+          street={venue.address.street}
+        />
       </Row>
     );
   })
