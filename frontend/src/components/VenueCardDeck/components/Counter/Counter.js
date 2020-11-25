@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Badge } from 'react-bootstrap';
-import { fireBase } from '../../client';
+import { fireBase } from '../../../../client';
 
 function Counter({ id, maxCapacity }) {
   const [counter, setCounter] = useState({
     count: 0,
     badgeType: 'success',
   });
-  const [badgeType, setBadgeType] = useState('success');
   const countRef = fireBase.ref(`stores/${id}/visitors`);
   useEffect(() => {
     countRef.on('value', function(snapshot) {

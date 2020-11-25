@@ -2,7 +2,8 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { allVenues } from '../../client/api/queries/venues';
 import { Container, Col, Row } from 'react-bootstrap';
-import VenueCard from '../VenueCard/VenueCard';
+import VenueCard from './components/VenueCard/VenueCard';
+import FilterForm from './components/FilterForm/FilterForm';
 
 function VenueCardDeck() {
   const { loading, error, data } = useQuery(allVenues);
@@ -11,7 +12,7 @@ function VenueCardDeck() {
   if (error) return <p>Error :(</p>;
   const venuesList = data.venues.map(venue => {
     return (
-      <Row key={venue.is} xs={1}>
+      <Row key={venue.id} xs={1}>
         <VenueCard
           id={venue.id}
           name={venue.name}
@@ -26,6 +27,9 @@ function VenueCardDeck() {
   return (
     <Container>
       <Col>
+        <Row xs={1}>
+          <FilterForm />
+        </Row>
         {venuesList}
       </Col>
     </Container>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Image, Container, Collapse, Button, ButtonGroup } from 'react-bootstrap';
 import Counter from '../Counter/Counter';
-import defaultLogo from '../../imgs/default_logo.png';
+import defaultLogo from '../../../../imgs/default_logo.png';
 
 
 function VenueCard({ id, logo, name, maxCapacity, street }) {
@@ -12,7 +12,7 @@ function VenueCard({ id, logo, name, maxCapacity, street }) {
     <Card className={'mt-2'}>
       <Container fluid className={'d-flex flex-row align-items-center'}>
         <Image className={'img-responsive'} src={logoPath} style={{ width: "50px", margin: "10px" }} rounded />
-        <Container className={'p-0'}>
+        <Container className={'p-0 mr-1'}>
           <Card.Title>{name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{street}</Card.Subtitle>
         </Container>

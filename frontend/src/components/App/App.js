@@ -8,9 +8,9 @@ import { ApolloProvider } from '@apollo/client';
 import { client } from '../../client';
 import { Container } from 'react-bootstrap';
 import NavBar from '../NavBar/NavBar';
-import PageHome from '../PageHome/PageHome';
-import PageAbout from '../PageAbout/PageAbout';
-import PageLogin from '../PageLogin/PageLogin';
+import PageHome from '../pages/Home/PageHome';
+import PageAbout from '../pages/About/PageAbout';
+import PageLogin from '../pages/Login/PageLogin';
 import './app.scss';
 import Footer from '../Footer/Footer';
 

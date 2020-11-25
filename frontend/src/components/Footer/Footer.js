@@ -1,6 +1,5 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
-import mainLogo from "../../imgs/logo_koe.png";
 
 function Footer(){
   return (
