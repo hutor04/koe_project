@@ -1,14 +1,23 @@
-import React,{useContext}  from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import mainLogo from "../../imgs/logo_koe.png";
-import {UserContext} from '../../context/UserContext';
+import { useSelector, useDispatch } from 'react-redux';
 
-function NavBar(){
-  const { user } = useContext(UserContext);
+function NavBar() {
+  const user = useSelector(state => state.user)
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const navHandler = e => {
+    e.preventDefault();
+    localStorage.clear();
+    dispatch({type:"LOGOUT", payload: localStorage.getItem('user')});
+    history.push("/login")
+  }
+
   return (
     <Navbar bg="dark" variant="dark">
-      <Navbar.Brand href="#home">
+      <Navbar.Brand href="/">
         <img
           alt=""
           src={mainLogo}
@@ -21,7 +30,7 @@ function NavBar(){
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="mr-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
+      <Nav.Link href="/">Home</Nav.Link>
       
       {!user ? <Nav.Link href="/login">Log In</Nav.Link>  : ""}
       {!user ? <Nav.Link href="/signup">Sign Up</Nav.Link> : ""}
@@ -39,7 +48,7 @@ function NavBar(){
     </Form>
   </Navbar.Collapse>
       <Nav>
-      {user ? <Nav.Link as={Link} to='/login'>Logout</Nav.Link>: ""}
+      {user ? <Nav.Link onClick={navHandler} >Logout</Nav.Link>: ""}
       </Nav>
     </Navbar>
   );

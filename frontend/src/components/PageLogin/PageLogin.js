@@ -1,17 +1,14 @@
-import React, {useContext, useState} from 'react'
+import React from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
 import { login } from '../../client/api/queries/login';
 import {Link, useHistory } from 'react-router-dom';
 import { Container, Alert } from 'react-bootstrap';
-import {UserContext} from '../../context/UserContext'
+import { useSelector, useDispatch } from 'react-redux';
 
 const PageLogin = () => {
-    const { user, setUser } = useContext(UserContext);
-    if (user) {
-        localStorage.clear();
-        setUser(localStorage.getItem('token'));
-    }
+    const user = useSelector(state => state.user)
+    const dispatch = useDispatch();
 
     const history = useHistory();
     const emailEl = React.createRef();
@@ -27,12 +24,12 @@ const PageLogin = () => {
     loggingIn({ variables: { email: email, password: password}})
     .then(data => {
         const userData = data;
-        localStorage.setItem('user', userData.data.login.user)
+        localStorage.setItem('user', JSON.stringify(userData.data.login.user))
         localStorage.setItem('token', userData.data.login.token);
         localStorage.setItem('tokenExpiration', userData.data.login.tokenExpiration)
     })
+    .then(()=> {dispatch({type:"LOGIN", payload: localStorage.getItem('user')})})
     .then(()=> {history.push("/home")})
-    .then(()=> {setUser(localStorage.getItem('token'))})
     .catch(err => console.log(err));
     }
     const [loggingIn, { loading, error }] = useMutation(login);

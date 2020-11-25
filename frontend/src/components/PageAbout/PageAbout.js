@@ -1,10 +1,11 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { v4 as uuidv4 } from 'uuid';
 
 function PageAbout() {
   return (
     <Container>
-      <Row>
+      <Row key={uuidv4}>
         <Col>
           <h1>About</h1>
         </Col>

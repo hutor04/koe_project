@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
+
 function VenueCard(props) {
   return (
     <Card className={'mt-2'}>

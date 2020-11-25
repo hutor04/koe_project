@@ -1,13 +1,14 @@
-import React, {useState, useContext} from 'react'
+import React, { useState } from 'react'
 import { useMutation } from '@apollo/client';
 import { signup } from '../../client/api/queries/signup';
 import { login } from '../../client/api/queries/login';
 import {Link, useHistory} from 'react-router-dom';
 import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
-import {UserContext} from '../../context/UserContext'
 
+import { useDispatch } from 'react-redux';
 const SignUp = () => {
-    const { user, setUser } = useContext(UserContext);
+    const dispatch = useDispatch();
+
     const emailEl = React.createRef();
     const passwordEl = React.createRef();
     const firstNameEl= React.createRef();
@@ -55,7 +56,7 @@ const SignUp = () => {
             })
             .then(()=> temp= {})
             .then(()=> {history.push("/home")})
-            .then(()=> {setUser(localStorage.getItem('token'))})
+            .then(()=> {dispatch({type:"LOGIN", payload: localStorage.getItem('token')})})
             .catch(err => console.log(err));
 
         }).catch(err => console.log('top error', err));
