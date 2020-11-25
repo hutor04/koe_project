@@ -1,9 +1,11 @@
-import React from 'react';
+import React,{useContext}  from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import mainLogo from "../../imgs/logo_koe.png";
+import {UserContext} from '../../context/UserContext';
 
 function NavBar(){
+  const { user } = useContext(UserContext);
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="#home">
@@ -20,8 +22,9 @@ function NavBar(){
       <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="mr-auto">
       <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="/login">Log In</Nav.Link>
-      <Nav.Link href="/signup">Sign Up</Nav.Link>
+      
+      {!user ? <Nav.Link href="/login">Log In</Nav.Link>  : ""}
+      {!user ? <Nav.Link href="/signup">Sign Up</Nav.Link> : ""}
       <NavDropdown title="Menu" id="basic-nav-dropdown">
         <NavDropdown.Item href="#action/3.1">Edit Input</NavDropdown.Item>
         <NavDropdown.Divider />
@@ -36,7 +39,7 @@ function NavBar(){
     </Form>
   </Navbar.Collapse>
       <Nav>
-        <Nav.Link as={Link} to='/login'>Login</Nav.Link>
+      {user ? <Nav.Link as={Link} to='/login'>Logout</Nav.Link>: ""}
       </Nav>
     </Navbar>
   );

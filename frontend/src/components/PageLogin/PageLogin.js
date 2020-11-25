@@ -1,19 +1,26 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
 import { login } from '../../client/api/queries/login';
-import {Link} from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import {Link, useHistory } from 'react-router-dom';
+import { Container, Alert } from 'react-bootstrap';
+import {UserContext} from '../../context/UserContext'
+
 const PageLogin = () => {
+    const { user, setUser } = useContext(UserContext);
+
+    if (user) {
+        localStorage.clear();
+        setUser(localStorage.getItem('token'));
+    }
+
+    const history = useHistory();
     const emailEl = React.createRef();
     const passwordEl = React.createRef();
     const [loggingIn, { loading, error, data }] = useMutation(login);
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :( {console.log(error)}</p>;
-    if (data) {
-        localStorage.setItem('token', data.login.token);
-        localStorage.setItem('tokenExpiration', data.login.tokenExpiration);
-    }
+
     const SubmitHandler = e => {
         e.preventDefault();
         const email = emailEl.current.value;
@@ -21,7 +28,17 @@ const PageLogin = () => {
         if (email.trim().length === 0 ||password.trim().length === 0 ) {
             return;
         }
-    loggingIn({ variables: { email: email, password: password}}).catch(err => console.log(err));
+    loggingIn({ variables: { email: email, password: password}})
+    .then(data => {
+        const userData = data;
+        localStorage.setItem('user', userData.data.login.user)
+        localStorage.setItem('token', userData.data.login.token);
+        localStorage.setItem('tokenExpiration', userData.data.login.tokenExpiration)
+    })
+    .then(setUser(localStorage.getItem('token')))
+    .then(history.push("/home"))
+    .catch(err => console.log(err));
+    
     }
     return (
       <Container className="d-flex align-items-center justify-content-center"
@@ -30,6 +47,7 @@ const PageLogin = () => {
         <>
             <Card>
                 <Card.Body>
+                {user ? <Alert variant="primary">You have been logged out.</Alert>: ''}
                 <h2 className="text-center mb-4">Log In</h2>
                     <Form onSubmit={SubmitHandler}>
                         <Form.Group id="email">

@@ -2,8 +2,7 @@ import React, {useState} from 'react'
 import { useMutation } from '@apollo/client';
 import { signup } from '../../client/api/queries/signup';
 import {Link} from 'react-router-dom';
-import { Card, Form, Button, Alert } from 'react-bootstrap';
-import { Container } from 'react-bootstrap';
+import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
 
 const SignUp = () => {
     const emailEl = React.createRef();
@@ -15,11 +14,11 @@ const SignUp = () => {
     const [ newError, setNewError] = useState('');
     
     const [signingUp, { loading, error, data}] = useMutation(signup)
-if (loading) return <p>Loading...</p>;
-if (error) return <p>Error :(</p>;
-if (data) {
-    console.log(data);
-};
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error :(</p>;
+    if (data) {
+      console.log(data);
+    };
 
     const dropDownHandler = e => {
         setUserTypeEl(e.target.value);
