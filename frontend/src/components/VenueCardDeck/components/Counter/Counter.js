@@ -17,7 +17,7 @@ function Counter({ id, maxCapacity }) {
           badgeType: 'danger',
         });
       }
-      if (currentVal > maxCapacity * 0.5 && currentVal < maxCapacity * 0.9) {
+      if (currentVal > (maxCapacity * 0.5) && currentVal < (maxCapacity * 0.9)) {
         setCounter({
           count: currentVal,
           badgeType: 'warning',
