@@ -7,7 +7,21 @@ import { selectLoggedIn, logOutUser } from '../pages/Login/userStatusSlice';
 
 function NavBar(){
   const userLoggedIn = useSelector(selectLoggedIn);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  let userLinks;
+
+  if (userLoggedIn) {
+    userLinks = (
+      <>
+      <Nav.Link as={Link} to='/profile'><i className="far fa-user-circle"></i></Nav.Link>
+      <Nav.Link href={'#'} onClick={() => {dispatch(logOutUser())}}>Logout</Nav.Link>
+      </>
+    );
+  } else {
+    userLinks = <Nav.Link as={Link} to='/login'>Login</Nav.Link>;
+  }
+
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="/">
@@ -25,10 +39,7 @@ function NavBar(){
           <Nav.Link as={Link} to='/about'>About</Nav.Link>
       </Nav>
       <Nav>
-        { userLoggedIn
-          ? <Nav.Link href={'#'} onClick={() => {dispatch(logOutUser())}}>Logout</Nav.Link>
-          : <Nav.Link as={Link} to='/login'>Login</Nav.Link>
-        }
+        { userLinks }
       </Nav>
     </Navbar>
   );

@@ -6,6 +6,7 @@ export const login = `
                 firstName
                 lastName
                 userType
+                email
             }
             token
             tokenExpiration

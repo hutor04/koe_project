@@ -9,6 +9,7 @@ const userStatusSlice = createSlice({
     id: '',
     firstName: '',
     lastName: '',
+    email: '',
     userType: '',
     token: '',
     tokenExpiration: '',
@@ -19,10 +20,11 @@ const userStatusSlice = createSlice({
   reducers: {
     profileLoaded(state, action) {
       const { user, token, tokenExpiration } = action.payload;
-      const { id, firstName, lastName, userType } = user;
+      const { id, firstName, lastName, email, userType } = user;
       state.id = id;
       state.firstName = firstName;
       state.lastName = lastName;
+      state.email = email;
       state.userType = userType;
       state.token = token;
       state.tokenExpiration = tokenExpiration;
@@ -57,6 +59,7 @@ export const selectUser = ({ userStatus }) => {
     id: userStatus.id,
     firstName: userStatus.firstName,
     lastName: userStatus.lastName,
+    email: userStatus.email,
     userType: userStatus.userType,
     token: userStatus.token,
   });

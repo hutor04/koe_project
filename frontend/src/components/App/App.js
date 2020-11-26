@@ -11,6 +11,8 @@ import NavBar from '../NavBar/NavBar';
 import PageHome from '../pages/Home/PageHome';
 import PageAbout from '../pages/About/PageAbout';
 import PageLogin from '../pages/Login/PageLogin';
+import PageProfile from '../pages/Profile/PageProfile';
+
 import './app.scss';
 import Footer from '../Footer/Footer';
 
@@ -26,6 +28,9 @@ function App() {
             </Route>
             <Route path="/login">
               <PageLogin />
+            </Route>
+            <Route path="/profile">
+              <PageProfile />
             </Route>
             <Route path="/">
               <PageHome />
