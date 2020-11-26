@@ -1,13 +1,15 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import COUNTER from '../../../../client/api/queries/counter';
 
 function CounterButton({id, delta}) {
   const [updateVenueCounter] = useMutation(COUNTER);
 console.log(id, delta)
   return (
-    <div>
-      <button
+    <ButtonGroup>
+      <Button
+      variant = {delta==='increment'? "outline-danger": delta==="decrement"? "outline-info":"secondary"}
       value={delta}
         required
         onClick={e => {
@@ -18,9 +20,9 @@ console.log(id, delta)
           updateVenueCounter({ variables: vars }).then(data => console.log(data)).catch(err => console.log(err));
         }}
         >
-            {delta==='increment'? "+": "-"} 
-        </button>
-    </div>
+            {delta==='increment'? "+": delta==="decrement"?"-":"reset"} 
+        </Button>
+    </ButtonGroup>
   );
 }
 

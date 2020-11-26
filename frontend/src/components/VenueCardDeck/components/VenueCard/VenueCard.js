@@ -18,9 +18,10 @@ function VenueCard({ id, logo, name, maxCapacity, street }) {
           <Card.Subtitle className="mb-2 text-muted">{street}</Card.Subtitle>
         </Container>
         <ButtonGroup>
-          <CounterButton id={id} delta={'increment'}/>
+        <CounterButton id={id} delta={'decrement'}/>
           <Counter id={id} maxCapacity={maxCapacity}/>
-          <CounterButton id={id} delta={'decrement'}/>
+          <CounterButton id={id} delta={'increment'}/>
+          <CounterButton id={id} delta={'reset'}/>
           <Button
             onClick={() => setOpen(!open)}
             aria-controls={collapseId}
