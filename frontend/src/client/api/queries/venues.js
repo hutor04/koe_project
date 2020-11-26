@@ -7,6 +7,12 @@ export const allVenues = gql`
             name
             maxCapacity
             venueType
+            logo {
+                _id
+                filename
+                encoding
+                mimetype
+            }
             address {
                 street
                 house

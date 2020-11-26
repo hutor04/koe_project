@@ -1,11 +1,8 @@
-const mongodb = require('mongodb');
-const { MongoClient } = require('mongodb');
-
-const client = new MongoClient('mongodb://localhost:27017/', { useUnifiedTopology: true });
+const mongoose = require('mongoose');
+const { GridFSBucket } = require('mongodb');
 
 const addFile = async (file) => {
-  await client.connect();
-  const db = client.db('b_good');
+  const { db } = mongoose.connection;
   const {
     createReadStream,
     filename,
@@ -13,7 +10,7 @@ const addFile = async (file) => {
     encoding,
   } = await file;
   const stream = createReadStream();
-  const bucket = new mongodb.GridFSBucket(db, { bucketName: 'gridfsdownload' });
+  const bucket = new GridFSBucket(db, { bucketName: 'gridfsdownload' });
   const uploadStream = bucket.openUploadStream(filename);
   await new Promise((resolve, reject) => {
     stream
