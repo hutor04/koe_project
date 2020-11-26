@@ -52,7 +52,7 @@ const PageLogin = () => {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" ref={passwordEl} required></Form.Control>
                         </Form.Group>
-                <Button type="submit" className="w-100 mt-2">{loading ? 'Loading…' : 'Submit'}</Button>
+                        <Button type="submit" className="w-100 mt-2">{loading ? 'Loading…' : 'Submit'}</Button>
                     </Form>
                 </Card.Body>
             </Card>                
