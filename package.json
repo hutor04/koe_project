@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "apollo-fetch": "^0.7.0",
-    "formik": "^2.2.5"
-  }
-}

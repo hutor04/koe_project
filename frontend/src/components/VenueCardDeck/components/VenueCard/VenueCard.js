@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Image, Container, Collapse, Button, ButtonGroup } from 'react-bootstrap';
 import Counter from '../Counter/Counter';
+import CounterButton from '../Counter/CounterButton';
 import defaultLogo from '../../../../imgs/default_logo.png';
 
 
@@ -17,7 +18,9 @@ function VenueCard({ id, logo, name, maxCapacity, street }) {
           <Card.Subtitle className="mb-2 text-muted">{street}</Card.Subtitle>
         </Container>
         <ButtonGroup>
+          <CounterButton id={id} delta={'increment'}/>
           <Counter id={id} maxCapacity={maxCapacity}/>
+          <CounterButton id={id} delta={'decrement'}/>
           <Button
             onClick={() => setOpen(!open)}
             aria-controls={collapseId}
