@@ -40,6 +40,7 @@ const typeDefs = gql`
         id: ID
         name: String
         street: String
+        venueType: venueTypes
       ): [Venue]!
   }
   type Venue {

@@ -1,13 +1,18 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { allVenues } from '../../client/api/queries/venues';
-import { Container, Col, Row } from 'react-bootstrap';
-import VenueCard from './components/VenueCard/VenueCard';
-import FilterForm from './components/FilterForm/FilterForm';
+import { allVenues } from '../../../../client/api/queries/venues';
+import { Row } from 'react-bootstrap';
+import VenueCard from '../VenueCard/VenueCard';
 
-function VenueCardDeck() {
-  const { loading, error, data } = useQuery(allVenues);
 
+function VenueCardDeck({ filter }) {
+  const variables = {};
+  for (const prop in filter) {
+    if (filter[prop] !== '') {
+      variables[prop] = filter[prop];
+    }
+  }
+  const { loading, error, data } = useQuery(allVenues, { variables: variables });
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   const venuesList = data.venues.map(venue => {
@@ -23,17 +28,11 @@ function VenueCardDeck() {
       </Row>
     );
   })
-
   return (
-    <Container>
-      <Col>
-        <Row xs={1}>
-          <FilterForm />
-        </Row>
-        {venuesList}
-      </Col>
-    </Container>
-  )
+    <div>
+      {venuesList}
+    </div>
+  );
 }
 
 export default VenueCardDeck;

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Alert, Card, Form, Button } from 'react-bootstrap';
 import {useFormik} from "formik";
-import { logInUser, selectError } from '../useStatusSlice';
+import { logInUser, selectError } from '../../userStatusSlice';
 
 const LoginForm = () => {
   const [showError, setShowError] = useState(true);
@@ -22,7 +22,7 @@ const LoginForm = () => {
     if (!error) {
       setShowError(true);
     }
-  })
+  }, [error]);
   return (
     <Container className="d-flex align-items-center justify-content-center"
                style={{ minHeight: "100vh"}}>

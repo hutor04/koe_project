@@ -1,5 +1,5 @@
 import React from 'react';
-import VenueCardDeck from '../../VenueCardDeck/VenueCardDeck';
+import VenueCardDeckWithFilter from '../../VenueCardDeck/venueCardDeckWithFilter';
 import {Col, Container, Row} from "react-bootstrap";
 
 function PageHome() {
@@ -12,7 +12,7 @@ function PageHome() {
       </Row>
       <Row>
         <Col>
-          <VenueCardDeck />
+          <VenueCardDeckWithFilter />
         </Col>
       </Row>
     </Container>
