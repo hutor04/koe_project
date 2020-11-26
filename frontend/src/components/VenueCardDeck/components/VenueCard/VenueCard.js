@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, Image, Container, Collapse, Button, ButtonGroup } from 'react-bootstrap';
 import Counter from '../Counter/Counter';
 import CounterButton from '../Counter/CounterButton';
+import DeleteVenue from '../VenueUpdates/DeleteVenue';
 import defaultLogo from '../../../../imgs/default_logo.png';
 
 
@@ -18,10 +19,7 @@ function VenueCard({ id, logo, name, maxCapacity, street }) {
           <Card.Subtitle className="mb-2 text-muted">{street}</Card.Subtitle>
         </Container>
         <ButtonGroup>
-        <CounterButton id={id} delta={'decrement'}/>
           <Counter id={id} maxCapacity={maxCapacity}/>
-          <CounterButton id={id} delta={'increment'}/>
-          <CounterButton id={id} delta={'reset'}/>
           <Button
             onClick={() => setOpen(!open)}
             aria-controls={collapseId}
@@ -33,11 +31,16 @@ function VenueCard({ id, logo, name, maxCapacity, street }) {
       </Container>
       <Collapse in={open}>
         <Container id={collapseId}>
+
           <div >
             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
             terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
             labore wes anderson cred nesciunt sapiente ea proident.
           </div>
+          <CounterButton id={id} delta={'decrement'}/>
+          <CounterButton id={id} delta={'increment'}/>
+          <CounterButton id={id} delta={'reset'}/>
+          <DeleteVenue id={id}/>
         </Container>
       </Collapse>
     </Card>

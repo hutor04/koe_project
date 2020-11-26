@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import COUNTER from '../../../../client/api/queries/counter';
 
-function CounterButton({id, delta}) {
+const CounterButton = ({id, delta}) => {
   const [updateVenueCounter] = useMutation(COUNTER);
 console.log(id, delta)
   return (
