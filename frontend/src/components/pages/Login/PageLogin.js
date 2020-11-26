@@ -1,17 +1,22 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectLoggedIn } from './useStatusSlice';
 import { Container, Row, Col } from 'react-bootstrap';
+import LoginForm from './components/LoginForm';
 
 function PageLogin() {
+  const userStatus = useSelector(selectLoggedIn);
+  if (userStatus) {
+    return (
+      <Redirect to="/" />
+    );
+  }
   return (
     <Container>
       <Row>
         <Col>
-          <h1>Login</h1>
-        </Col>
-      </Row>
-      <Row>
-        <Col style={{ height: '76vh' }}>
-          <p>Some content</p>
+          <LoginForm />
         </Col>
       </Row>
     </Container>
