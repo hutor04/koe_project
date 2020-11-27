@@ -13,6 +13,7 @@ import PageAbout from '../pages/About/PageAbout';
 import PageSignup from '../pages/PageSignup/PageSignup';
 import PageLogin from '../pages/Login/PageLogin';
 import PageProfile from '../pages/Profile/PageProfile';
+import PageAddVenue from '../pages/CreateVenue/PageAddVenue';
 
 import './app.scss';
 import Footer from '../Footer/Footer';
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <Route path="/profile">
               <PageProfile />
+            </Route>
+            <Route path="/add-venue">
+              <PageAddVenue />
             </Route>
             <Route path="/">
               <PageHome />

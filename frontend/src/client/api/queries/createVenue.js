@@ -6,12 +6,14 @@ const CREATE_VENUE = gql`
         $address: AddressInput!
         $maxCapacity: Int!
         $venueType: venueTypes!
+        $phoneNumber: String
         $logo: Upload
     ) {createVenue(
         name: $name
         address: $address
         maxCapacity: $maxCapacity
         venueType: $venueType
+        phoneNumber: $phoneNumber
         logo: $logo
     ){
         id

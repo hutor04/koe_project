@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useMutation } from '@apollo/client';
 import {Alert, Button, ButtonGroup } from 'react-bootstrap';
-import DELETE_VENUE from '../../../../client/api/queries/deleteVenue';
+import DELETE_VENUE from '../../client/api/queries/deleteVenue';
 
 const  DeleteVenue = ({id}) => {
   const [deleteVenue] = useMutation(DELETE_VENUE);
@@ -17,7 +17,6 @@ const  DeleteVenue = ({id}) => {
   }
   return (
     <ButtonGroup>
-
       <Alert show={show} variant="danger">
         Are you sure you want to delete this venue?
         <div className="d-flex justify-content-end">

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import UserprofileCard from './components/UserProfileCard/UserProfileCard';
 import VenueCardDeckBusiness from './components/VenueCardDeckBusiness/VenueCardDeckBusiness';
 
@@ -14,6 +15,9 @@ function PageProfile() {
           <Container>
             <Row>
               <h2>Your Locations</h2>
+            </Row>
+            <Row>
+              <Button as={Link} to={'/add-venue'} variant="success"><i className="fas fa-plus"></i> Add New</Button>
             </Row>
             <VenueCardDeckBusiness />
           </Container>

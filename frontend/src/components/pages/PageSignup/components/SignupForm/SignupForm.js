@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useMutation } from '@apollo/client';
 import {useFormik} from "formik";
 import { Link } from 'react-router-dom';
@@ -18,7 +18,6 @@ const SignupForm = () => {
     },
     onSubmit: values => {
       signingUp({ variables: values}).catch(err => console.log('top error', err));
-      console.log(data);
       formik.resetForm();
     },
   });
