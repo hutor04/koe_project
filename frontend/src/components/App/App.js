@@ -10,6 +10,7 @@ import { Container } from 'react-bootstrap';
 import NavBar from '../NavBar/NavBar';
 import PageHome from '../pages/Home/PageHome';
 import PageAbout from '../pages/About/PageAbout';
+import PageSignup from '../pages/PageSignup/PageSignup';
 import PageLogin from '../pages/Login/PageLogin';
 import PageProfile from '../pages/Profile/PageProfile';
 
@@ -28,6 +29,9 @@ function App() {
             </Route>
             <Route path="/login">
               <PageLogin />
+            </Route>
+            <Route path="/signup">
+              <PageSignup />
             </Route>
             <Route path="/profile">
               <PageProfile />
