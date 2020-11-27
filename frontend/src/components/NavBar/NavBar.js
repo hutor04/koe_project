@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import mainLogo from '../../imgs/logo_koe.png';
-import { selectLoggedIn, logOutUser } from '../pages/Login/useStatusSlice';
+import { selectLoggedIn, logOutUser } from '../pages/Login/userStatusSlice';
 
 function NavBar(){
   const userLoggedIn = useSelector(selectLoggedIn);

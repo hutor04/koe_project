@@ -13,6 +13,9 @@ const venues = async (_, args) => {
     const regexStreet = new RegExp(`${args.street}`);
     query['address.street'] = { $regex: regexStreet, $options: 'i' };
   }
+  if (args.venueType) {
+    query.venueType = args.venueType;
+  }
   return Venue.find(query);
 };
 

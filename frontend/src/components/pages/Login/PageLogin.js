@@ -1,9 +1,9 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectLoggedIn } from './useStatusSlice';
+import { selectLoggedIn } from './userStatusSlice';
 import { Container, Row, Col } from 'react-bootstrap';
-import LoginForm from './components/LoginForm';
+import LoginForm from './components/LoginForm/LoginForm';
 
 function PageLogin() {
   const userStatus = useSelector(selectLoggedIn);
