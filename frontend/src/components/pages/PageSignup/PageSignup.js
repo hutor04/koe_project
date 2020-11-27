@@ -7,11 +7,6 @@ function PageSignup() {
     <Container>
       <Row>
         <Col>
-          <h1>Signup</h1>
-        </Col>
-      </Row>
-      <Row>
-        <Col style={{ height: '76vh' }}>
           <SignupForm />
         </Col>
       </Row>
