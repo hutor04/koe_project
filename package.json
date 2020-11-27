@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "apollo-fetch": "^0.7.0",
+    "formik": "^2.2.5",
+    "react-gravatar": "^2.6.3",
+    "react-redux": "^7.2.2"
+  }
+}

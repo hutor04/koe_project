@@ -1,22 +1,17 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Row } from 'react-bootstrap';
-import VenueCard from '../VenueCard/VenueCard';
+import VenueCardBusiness from '../VenueCardBusiness/VenueCardBusiness';
+import ownVenues from '../../../../../client/api/queries/own-venues';
 
-function VenueCardDeck({ query, filter }) {
-  const variables = {};
-  for (const prop in filter) {
-    if (filter[prop] !== '') {
-      variables[prop] = filter[prop];
-    }
-  }
-  const { loading, error, data } = useQuery(query, { variables: variables });
+function VenueCardDeckBusiness() {
+  const { loading, error, data } = useQuery(ownVenues);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-  const venuesList = data.venues.map(venue => {
+  const venuesList = data.listOwnVenues.map(venue => {
     return (
       <Row key={venue.id} xs={1}>
-        <VenueCard
+        <VenueCardBusiness
           id={venue.id}
           name={venue.name}
           logo={venue.logo._id}
@@ -33,4 +28,4 @@ function VenueCardDeck({ query, filter }) {
   );
 }
 
-export default VenueCardDeck;
+export default VenueCardDeckBusiness;

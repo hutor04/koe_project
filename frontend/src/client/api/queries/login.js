@@ -8,6 +8,7 @@ export const login = gql`
                 firstName
                 lastName
                 userType
+                email
             }
             token
             tokenExpiration
