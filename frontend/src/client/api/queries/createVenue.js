@@ -8,6 +8,7 @@ const CREATE_VENUE = gql`
         $venueType: venueTypes!
         $phoneNumber: String
         $logo: Upload
+        $hours: HoursInput
     ) {createVenue(
         name: $name
         address: $address
@@ -15,6 +16,7 @@ const CREATE_VENUE = gql`
         venueType: $venueType
         phoneNumber: $phoneNumber
         logo: $logo
+        hours: $hours
     ){
         id
         name

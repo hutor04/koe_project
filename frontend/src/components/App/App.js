@@ -17,6 +17,7 @@ import PageAddVenue from '../pages/CreateVenue/PageAddVenue';
 
 import './app.scss';
 import Footer from '../Footer/Footer';
+import OpeningHours from '../VenueUpdates/OpeningHours';
 
 function App() {
   return (
@@ -39,6 +40,9 @@ function App() {
             </Route>
             <Route path="/add-venue">
               <PageAddVenue />
+            </Route>
+            <Route path="/openingHours">
+              <OpeningHours />
             </Route>
             <Route path="/">
               <PageHome />
