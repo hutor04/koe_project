@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Card, Image, Container, Collapse, Button } from 'react-bootstrap';
 import defaultLogo from '../../../../../imgs/default_logo.png';
 import DeleteVenue from '../../../../VenueUpdates/DeleteVenue';
+import EditVenue from '../../../../VenueUpdates/EditVenue';
 
 function VenueCardBusines({ id, logo, name, maxCapacity, street }) {
   const [open, setOpen] = useState(false);
@@ -16,7 +18,9 @@ function VenueCardBusines({ id, logo, name, maxCapacity, street }) {
           <Card.Subtitle className="mb-2 text-muted">{street}</Card.Subtitle>
         </Container>
           <Button variant={'light'} className={'mr-2'}><i className="fas fa-stopwatch-20"></i></Button>
-          <Button variant={'light'} className={'mr-2'}><i className="far fa-edit"></i></Button>
+          <Button 
+          variant={'light'} 
+          className={'mr-2'}><i className="far fa-edit"></i></Button>
           <Button
             onClick={() => setOpen(!open)}
             aria-controls={collapseId}
@@ -31,6 +35,7 @@ function VenueCardBusines({ id, logo, name, maxCapacity, street }) {
             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
             terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
             labore wes anderson cred nesciunt sapiente ea proident.
+            <EditVenue id={id}/>
             <DeleteVenue id={id}/>
           </div>
         </Container>

@@ -18,6 +18,7 @@ import PageAddVenue from '../pages/CreateVenue/PageAddVenue';
 import './app.scss';
 import Footer from '../Footer/Footer';
 import OpeningHours from '../VenueUpdates/OpeningHours';
+import EditVenue from '../VenueUpdates/EditVenue';
 
 function App() {
   return (
@@ -43,6 +44,9 @@ function App() {
             </Route>
             <Route path="/openingHours">
               <OpeningHours />
+            </Route>
+            <Route path="/editVenue">
+              <EditVenue />
             </Route>
             <Route path="/">
               <PageHome />
