@@ -16,7 +16,7 @@ const oneVenue = gql`
     wednesday{open,close},
     thursday{open,close},
     friday{open,close},
-    satruday{open,close},
+    saturday{open,close},
     sunday{open,close},
   },
   venueType}

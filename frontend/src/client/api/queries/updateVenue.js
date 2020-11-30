@@ -11,6 +11,7 @@ const UPDATE_VENUE = gql`
         $logo: Upload
         $hours: HoursInput
     ) {updateVenue(
+        id: $id
         name: $name
         address: $address
         maxCapacity: $maxCapacity

@@ -77,7 +77,7 @@ const typeDefs = gql`
       wednesday: OpenClose
       thursday: OpenClose
       friday: OpenClose
-      satruday: OpenClose
+      saturday: OpenClose
       sunday: OpenClose
   }
   input HoursInput {
@@ -86,7 +86,7 @@ const typeDefs = gql`
       wednesday: OpenCloseInput
       thursday: OpenCloseInput
       friday: OpenCloseInput
-      satruday: OpenCloseInput
+      saturday: OpenCloseInput
       sunday: OpenCloseInput
   }
   type OpenClose {

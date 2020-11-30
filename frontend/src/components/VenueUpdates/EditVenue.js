@@ -18,8 +18,6 @@ const EditVenue = ({readOnly, id}) => {
   return 'loading';
  };
 
-  console.log(filledData, 'this is printing');
-
   const weekday = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
   if (queryData.loading) {
     return <p>Loading...</p>
@@ -29,11 +27,11 @@ const EditVenue = ({readOnly, id}) => {
     <Formik
     enableReinitialize={true}
       onSubmit={(values, {resetForm}) => {
-        console.log(values);
         const vals = {...values};
         vals.maxCapacity = Number(values.maxCapacity);
         vals.id= id
-        updateVenue({ variables: vals}).catch(err => console.log('top error', err));
+        console.log(filledData.hours.monday.open);
+        updateVenue({ variables: vals}).then(data=> console.log(data, 'this printed')).catch(err => console.log('top error', err));
         resetForm();
       }}
       initialValues={{
