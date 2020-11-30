@@ -3,7 +3,7 @@ import { Card, Image, Container, Collapse, Button } from 'react-bootstrap';
 import defaultLogo from '../../../../../imgs/default_logo.png';
 import DeleteVenue from '../../../../VenueUpdates/DeleteVenue';
 
-function VenueCardBusines({ id, logo, name, maxCapacity, street }) {
+function VenueCardBusines({ id, logo, name, maxCapacity, street, updateList }) {
   const [open, setOpen] = useState(false);
   const logoPath = logo ? `images/logos/${logo}` : defaultLogo;
   const collapseId = `collapse-${id}`;
@@ -31,7 +31,7 @@ function VenueCardBusines({ id, logo, name, maxCapacity, street }) {
             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
             terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
             labore wes anderson cred nesciunt sapiente ea proident.
-            <DeleteVenue id={id}/>
+            <DeleteVenue id={id} updateList={updateList}/>
           </div>
         </Container>
       </Collapse>

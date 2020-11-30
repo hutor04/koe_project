@@ -5,7 +5,7 @@ import VenueCardBusiness from '../VenueCardBusiness/VenueCardBusiness';
 import ownVenues from '../../../../../client/api/queries/own-venues';
 
 function VenueCardDeckBusiness() {
-  const { loading, error, data } = useQuery(ownVenues);
+  const { loading, error, data, refetch } = useQuery(ownVenues);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   const venuesList = data.listOwnVenues.map(venue => {
@@ -17,6 +17,7 @@ function VenueCardDeckBusiness() {
           logo={venue.logo._id}
           maxCapacity={venue.maxCapacity}
           street={venue.address.street}
+          updateList={refetch}
         />
       </Row>
     );

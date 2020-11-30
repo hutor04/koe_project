@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import {Alert, Button, ButtonGroup } from 'react-bootstrap';
 import DELETE_VENUE from '../../client/api/queries/deleteVenue';
 
-const  DeleteVenue = ({id}) => {
+const  DeleteVenue = ({id, updateList}) => {
   const [deleteVenue] = useMutation(DELETE_VENUE);
   const [show, setShow] = useState(false);
 
@@ -12,7 +12,7 @@ const  DeleteVenue = ({id}) => {
       id: id,
     };
     deleteVenue({ variables: vars })
-      .then(data => console.log(data))
+      .then(() => updateList())
       .catch(err => console.log(err));
   }
   return (
