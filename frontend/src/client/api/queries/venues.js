@@ -18,6 +18,7 @@ export const allVenues = gql`
             address {
                 street
                 house
+            }
             
             hours {
                 monday {
@@ -25,6 +26,6 @@ export const allVenues = gql`
                     close
                 }
             }
-        }
+         }
     }
 `;
