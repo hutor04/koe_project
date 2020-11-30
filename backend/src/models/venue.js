@@ -27,19 +27,15 @@ const venueSchema = new mongoose.Schema({
   logo: {
     _id: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
     },
     filename: {
       type: String,
-      required: true,
     },
     mimetype: {
       type: String,
-      required: true,
     },
     encoding: {
       type: String,
-      required: true,
     },
   },
   address: {

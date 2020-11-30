@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { createApolloFetch } from 'apollo-fetch';
 import { login } from '../../../client/api/queries/login-literal';
+import { me } from '../../../client/api/queries/me-literal';
 import config from '../../../config';
 
 const userStatusSlice = createSlice({
@@ -76,6 +77,23 @@ export const logInUser = ({ email, password }) => (async (dispatch, getState) =>
       const data = resp.data.login;
       localStorage.setItem('token', data.token);
       dispatch(profileLoaded(data));
+    })
+    .catch(err => {
+      dispatch(loadError());
+      console.log(err);
+    });
+});
+
+export const restoreSession = () => (async (dispatch, getState) => {
+  console.log('aaa');
+  const fetch = createApolloFetch({
+    uri: config.api,
+  });
+  fetch({ query: me })
+    .then(resp => {
+      const data = resp.data.me;
+      console.log(resp);
+      // dispatch(profileLoaded(data));
     })
     .catch(err => {
       dispatch(loadError());

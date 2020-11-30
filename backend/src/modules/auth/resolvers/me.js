@@ -1,6 +1,14 @@
 /* eslint-disable no-underscore-dangle */
-const me = async (_, args, { user }) => ({
-  ...user._doc,
-  id: user.id,
-});
+const { AuthenticationError } = require('apollo-server-express');
+
+const me = async (_, args, context) => {
+  if (!context.user) {
+    throw new AuthenticationError('You are not authenticated!');
+  }
+  return ({
+    ...context.user._doc,
+    id: context.user.id,
+  });
+};
+
 module.exports = me;
