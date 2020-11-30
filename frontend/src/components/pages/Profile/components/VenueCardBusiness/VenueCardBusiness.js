@@ -7,7 +7,6 @@ import EditVenue from '../../../../VenueUpdates/EditVenue';
 function VenueCardBusines({ id, logo, name, maxCapacity, street, updateList }) {
   const [open, setOpen] = useState(false);
   const [editMode, setEditMode] = useState('readOnly');
-  console.log(editMode, 'theEditMode');
   const logoPath = logo ? `images/logos/${logo}` : defaultLogo;
   return (
     <Card className={'mt-2'}>
@@ -30,7 +29,6 @@ function VenueCardBusines({ id, logo, name, maxCapacity, street, updateList }) {
         : ""}
         <Button
             onClick={() => {setOpen(!open); setEditMode('readOnly')}}
-            aria-controls={collapseId}
             aria-expanded={open}
             variant={'light'}
           ><i className="fas fa-chevron-down"></i>

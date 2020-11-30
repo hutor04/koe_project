@@ -1,7 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { Venue } = require('../../../models/venue');
 const { createCounter } = require('../remote_counters/client');
-const addFile = require('./addFile');
+const addFile = require('../../../utils/manageFiles/addFile');
 
 const createVenue = async (_, {
   name,

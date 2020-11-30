@@ -32,10 +32,10 @@ const EditVenue = ({readOnly, id}) => {
         const vals = {...values};
         vals.maxCapacity = Number(values.maxCapacity);
         vals.id= id
-        console.log(filledData.logo, 'editVenue Logo', values.logo);
+        console.log(vals);
         updateVenue({ variables: vals}).then(data=> console.log(data, 'this printed')).catch(err => console.log('top error', err));
         history.push('/profile')
-        resetForm();
+        // resetForm();
       }}
       initialValues={{
         name: filledData.name,
@@ -109,7 +109,7 @@ const EditVenue = ({readOnly, id}) => {
             <Form.Group as={Col}>
               <Form.Label>Venue Name</Form.Label>
               <Form.Control
-              readOnly={readOnly} 
+              readOnly={readOnly}
                 aria-disabled="false"
                 placeholder="Store name"
                 onChange={handleChange("name")}
@@ -187,7 +187,7 @@ const EditVenue = ({readOnly, id}) => {
                                         value={values.hours[`${day}`]["close"]}
                                         />
                                         <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
-                                      </Form.Group>   
+                                      </Form.Group>
                                     </Form.Row>
                                   </Card.Body>
                                 </Card>))
@@ -261,7 +261,7 @@ const EditVenue = ({readOnly, id}) => {
           </Form.Row>
           {readOnly === "readOnly"
           ? ""
-          : <> 
+          : <>
           <Form.Row>
             <Form.Group as={Col}>
               <Form.Label>Add a logo</Form.Label>

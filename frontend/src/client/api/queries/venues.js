@@ -18,13 +18,7 @@ export const allVenues = gql`
             address {
                 street
                 house
-            
-            hours {
-                monday {
-                    open
-                    close
-                }
-            }
         }
+    }
     }
 `;
