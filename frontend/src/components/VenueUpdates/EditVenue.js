@@ -1,5 +1,6 @@
 import React from "react";
 import {Form, Col, Container, Button, Alert, Accordion, Card} from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 import { Formik, FieldArray } from "formik";
 import oneVenue from '../../client/api/queries/oneVenue';
@@ -9,6 +10,7 @@ import UPDATE_VENUE from '../../client/api/queries/updateVenue';
 const EditVenue = ({readOnly, id}) => {
   const [updateVenue, { loading, error, data}] = useMutation(UPDATE_VENUE);
   let filledData;
+  const history = useHistory();
 
   let queryData = useQuery(oneVenue, {variables: {id: id}});
 
@@ -32,6 +34,7 @@ const EditVenue = ({readOnly, id}) => {
         vals.id= id
         console.log(filledData.hours.monday.open);
         updateVenue({ variables: vals}).then(data=> console.log(data, 'this printed')).catch(err => console.log('top error', err));
+        history.push('/profile')
         resetForm();
       }}
       initialValues={{
