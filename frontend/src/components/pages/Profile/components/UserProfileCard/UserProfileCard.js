@@ -12,8 +12,7 @@ function UserProfileCard() {
       <Card.Body>
         <Card.Title>{user.firstName} {user.lastName}</Card.Title>
         <Card.Text>
-          <p><i className="far fa-envelope"></i> Email: {user.email}</p>
-          <p></p>
+          <i className="far fa-envelope"></i> Email: {user.email}
         </Card.Text>
         <Button variant="primary">Edit Profile</Button>
       </Card.Body>
