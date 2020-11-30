@@ -1,4 +1,4 @@
-import React, {useEffect, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,9 +22,9 @@ const PageHome = lazy(() => import('../pages/Home/PageHome'));
 
 function App() {
   const dispatch = useDispatch();
-  useEffect(() =>{
+  if (localStorage.getItem('token')) {
     dispatch(restoreSession());
-  }, [])
+  }
   return (
     <ApolloProvider client={client}>
       <Router>

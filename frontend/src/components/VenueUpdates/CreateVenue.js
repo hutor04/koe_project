@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, Col, Container, Button, Alert, Card} from 'react-bootstrap';
+import {Form, Col, Container, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { Formik } from "formik";
 import CREATE_VENUE from '../../client/api/queries/createVenue';
