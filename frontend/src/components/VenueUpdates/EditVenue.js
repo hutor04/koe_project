@@ -1,69 +1,91 @@
 import React from "react";
 import {Form, Col, Container, Button, Alert, Accordion, Card} from 'react-bootstrap';
-import { useMutation } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
+import { useMutation, useQuery } from '@apollo/client';
 import { Formik, FieldArray } from "formik";
-import CREATE_VENUE from '../../client/api/queries/createVenue';
+import oneVenue from '../../client/api/queries/oneVenue';
+import UPDATE_VENUE from '../../client/api/queries/updateVenue';
 
 
-const CreateVenue = () => {
-  const [createVenue, { loading, error, data}] = useMutation(CREATE_VENUE);
+const EditVenue = ({readOnly, id}) => {
+  const [updateVenue, { loading, error, data}] = useMutation(UPDATE_VENUE);
+  let filledData;
+  const history = useHistory();
+
+  let queryData = useQuery(oneVenue, {variables: {id: id}});
+
+ if (!queryData.loading) {
+  filledData = queryData.data.venues[0];
+ } else{
+  return 'loading';
+ };
+
   const weekday = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-  if (loading) {
+  if (queryData.loading) {
     return <p>Loading...</p>
   }
   return(
   <Container>
     <Formik
+    enableReinitialize={true}
       onSubmit={(values, {resetForm}) => {
-        console.log(values.logo, "!!CREATE VENUE!!");
         const vals = {...values};
         vals.maxCapacity = Number(values.maxCapacity);
-        createVenue({ variables: vals}).catch(err => console.log('top error', err));
+        vals.id= id
+        console.log(filledData.logo, 'editVenue Logo', values.logo);
+        updateVenue({ variables: vals}).then(data=> console.log(data, 'this printed')).catch(err => console.log('top error', err));
+        history.push('/profile')
         resetForm();
       }}
       initialValues={{
-        name: '',
-        phoneNumber: '',
+        name: filledData.name,
+        phoneNumber: filledData.phoneNumber,
         address: {
-          country: '',
-          city: '',
-          postalCode: '',
-          street: ''
+          country: filledData.address.country,
+          city: filledData.address.city,
+          postalCode: filledData.address.postalCode,
+          street: filledData.address.street
         },
-        maxCapacity: '',
-        venueType: '',
-        logo: '',
+        maxCapacity: filledData.maxCapacity,
+        venueType: filledData.venueType,
+        logo: filledData.logo,
         hours: {
           monday: {
-            open: '',
-            close:''
+            open: filledData.hours.monday.open,
+            close:filledData.hours.monday.close
           },
           tuesday: {
-            open: '',
-            close:''
+            open: filledData.hours.tuesday.open || filledData.hours.monday.open,
+            close:filledData.hours.tuesday.close || filledData.hours.monday.close
           },
           wednesday: {
-            open: '',
-            close:''
+            open: filledData.hours.wednesday.open || filledData.hours.monday.open,
+            close:filledData.hours.wednesday.close || filledData.hours.monday.close
           },
           thursday: {
-            open: '',
-            close:''
+            open: filledData.hours.thursday.open || filledData.hours.monday.open,
+            close:filledData.hours.thursday.close || filledData.hours.monday.close
           },
           friday: {
-            open: '',
-            close:''
+            open: filledData.hours.friday.open || filledData.hours.monday.open,
+            close:filledData.hours.friday.close || filledData.hours.monday.close
           },
           saturday: {
-            open: '',
-            close:''
+            open: filledData.hours.friday.open || filledData.hours.monday.open,
+            close:filledData.hours.friday.close || filledData.hours.monday.close
           },
           sunday: {
-            open: '',
-            close:''
+            open: filledData.hours.sunday.open || filledData.hours.monday.open,
+            close:filledData.hours.sunday.close || filledData.hours.monday.close
           },
         }
       }}
+      // weekday.forEach(day => {
+      //   return  obj = { [day]: {
+      //       open: 'filledData.hours[day].open,',
+      //       close: 'filledData.hours[day].close'
+      //   } }
+      // })
     >
       {({
           handleSubmit,
@@ -75,7 +97,7 @@ const CreateVenue = () => {
         <Form>
           {data
             ? <Alert variant={'success'}>
-                You successfully created a new location.
+                You successfully edited your location.
               </Alert>
             : ''}
           {error
@@ -87,6 +109,8 @@ const CreateVenue = () => {
             <Form.Group as={Col}>
               <Form.Label>Venue Name</Form.Label>
               <Form.Control
+              readOnly={readOnly} 
+                aria-disabled="false"
                 placeholder="Store name"
                 onChange={handleChange("name")}
                 value={values.name}
@@ -99,6 +123,7 @@ const CreateVenue = () => {
             <Form.Group as={Col}>
               <Form.Label>Venue Type</Form.Label>
               <Form.Control
+              readOnly={readOnly}
                 as="select"
                 placeholder="Venue Type"
                 onChange={handleChange("venueType")}
@@ -117,6 +142,7 @@ const CreateVenue = () => {
               <Form.Group as={Col}>
                 <Form.Label>Max Capacity</Form.Label>
                 <Form.Control
+                readOnly={readOnly}
                   placeholder="Max Capacity"
                   onChange={handleChange("maxCapacity")}
                   value={values.maxCapacity}
@@ -147,6 +173,7 @@ const CreateVenue = () => {
                                       <Form.Group as={Col}>
                                         <Form.Label>Open</Form.Label>
                                         <Form.Control
+                                        readOnly={readOnly}
                                         placeholder="Open"
                                         onChange={handleChange(`hours.${day}.open`)}
                                         value={values.hours[`${day}`]["open"]}
@@ -154,6 +181,7 @@ const CreateVenue = () => {
                                         <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
                                         <Form.Label>Close</Form.Label>
                                         <Form.Control
+                                        readOnly={readOnly}
                                         placeholder="Close"
                                         onChange={handleChange(`hours.${day}.close`)}
                                         value={values.hours[`${day}`]["close"]}
@@ -174,6 +202,7 @@ const CreateVenue = () => {
             <Form.Group as={Col}>
               <Form.Label>Phone number</Form.Label>
               <Form.Control
+              readOnly={readOnly}
                 placeholder="Phone number"
                 onChange={handleChange("phoneNumber")}
                 value={values.phoneNumber}
@@ -186,6 +215,7 @@ const CreateVenue = () => {
             <Form.Group as={Col}>
               <Form.Label>Street Address</Form.Label>
               <Form.Control
+              readOnly={readOnly}
                 placeholder="Street Address"
                 onChange={handleChange("address.street")}
                 value={values.address.street}
@@ -198,6 +228,7 @@ const CreateVenue = () => {
             <Form.Group as={Col}>
               <Form.Label>City</Form.Label>
               <Form.Control
+              readOnly={readOnly}
                 placeholder="City"
                 onChange={handleChange("address.city")}
                 value={values.address.city}
@@ -208,6 +239,7 @@ const CreateVenue = () => {
             <Form.Group as={Col}>
               <Form.Label>Country</Form.Label>
               <Form.Control
+              readOnly={readOnly}
                 placeholder="Country"
                 onChange={handleChange('address.country')}
                 value={values.address.country}
@@ -218,6 +250,7 @@ const CreateVenue = () => {
             <Form.Group as={Col}>
               <Form.Label>Postal code</Form.Label>
               <Form.Control
+              readOnly={readOnly}
                 placeholder="Postal code"
                 onChange={handleChange("address.postalCode")}
                 value={values.address.postalCode}
@@ -226,10 +259,14 @@ const CreateVenue = () => {
               </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
+          {readOnly === "readOnly"
+          ? ""
+          : <> 
           <Form.Row>
             <Form.Group as={Col}>
               <Form.Label>Add a logo</Form.Label>
               <Form.Control
+              readOnly={readOnly}
                 placeholder="Image"
                 name={'logo'}
                 type={'file'}
@@ -239,8 +276,10 @@ const CreateVenue = () => {
               />
             </Form.Group>
           </Form.Row>
-          <Button variant="outline-secondary" onClick={resetForm}>Clear</Button>{' '}
-          <Button onClick={handleSubmit}>Add New Venue</Button>
+          <Button variant="outline-secondary" onClick={resetForm}>Clear</Button>
+          <Button onClick={handleSubmit}>Update Venue</Button></>
+         }
+
         </Form>
       )}
     </Formik>
@@ -248,4 +287,4 @@ const CreateVenue = () => {
 
 )};
 
-export default CreateVenue;
+export default EditVenue;
