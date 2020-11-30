@@ -6,7 +6,6 @@ import DeleteVenue from '../../../../VenueUpdates/DeleteVenue';
 function VenueCardBusines({ id, logo, name, maxCapacity, street, updateList }) {
   const [open, setOpen] = useState(false);
   const logoPath = logo ? `images/logos/${logo}` : defaultLogo;
-  const collapseId = `collapse-${id}`;
   return (
     <Card className={'mt-2'}>
       <Container fluid className={'d-flex flex-row align-items-center'}>
@@ -19,14 +18,12 @@ function VenueCardBusines({ id, logo, name, maxCapacity, street, updateList }) {
           <Button variant={'light'} className={'mr-2'}><i className="far fa-edit"></i></Button>
           <Button
             onClick={() => setOpen(!open)}
-            aria-controls={collapseId}
-            aria-expanded={open}
             variant={'light'}
           ><i className="fas fa-chevron-down"></i>
           </Button>
       </Container>
       <Collapse in={open}>
-        <Container id={collapseId}>
+        <Container>
           <div >
             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
             terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer

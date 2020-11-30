@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Card, Image, Container, Collapse, Button, ButtonGroup } from 'react-bootstrap';
 import Counter from '../Counter/Counter';
 import defaultLogo from '../../../../imgs/default_logo.png';
@@ -7,7 +7,6 @@ import defaultLogo from '../../../../imgs/default_logo.png';
 function VenueCard({ id, logo, name, maxCapacity, street }) {
   const [open, setOpen] = useState(false);
   const logoPath = logo ? `images/logos/${logo}` : defaultLogo;
-  const collapseId = `collapse-${id}`;
   return (
     <Card className={'mt-2'}>
       <Container fluid className={'d-flex flex-row align-items-center'}>
@@ -20,15 +19,13 @@ function VenueCard({ id, logo, name, maxCapacity, street }) {
           <Counter id={id} maxCapacity={maxCapacity}/>
           <Button
             onClick={() => setOpen(!open)}
-            aria-controls={collapseId}
-            aria-expanded={open}
             variant={'light'}
           ><i className="fas fa-chevron-down"></i>
           </Button>
         </ButtonGroup>
       </Container>
       <Collapse in={open}>
-        <Container id={collapseId}>
+        <Container>
           <div >
             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
             terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
