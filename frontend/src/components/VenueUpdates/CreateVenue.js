@@ -15,7 +15,7 @@ const CreateVenue = () => {
   <Container>
     <Formik
       onSubmit={(values, {resetForm}) => {
-        console.log(values);
+        console.log(values.logo, "!!CREATE VENUE!!");
         const vals = {...values};
         vals.maxCapacity = Number(values.maxCapacity);
         createVenue({ variables: vals}).catch(err => console.log('top error', err));

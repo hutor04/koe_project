@@ -32,7 +32,7 @@ const EditVenue = ({readOnly, id}) => {
         const vals = {...values};
         vals.maxCapacity = Number(values.maxCapacity);
         vals.id= id
-        console.log(filledData.hours.monday.open);
+        console.log(filledData.logo, 'editVenue Logo', values.logo);
         updateVenue({ variables: vals}).then(data=> console.log(data, 'this printed')).catch(err => console.log('top error', err));
         history.push('/profile')
         resetForm();
@@ -48,35 +48,35 @@ const EditVenue = ({readOnly, id}) => {
         },
         maxCapacity: filledData.maxCapacity,
         venueType: filledData.venueType,
-        logo: filledData.name,
+        logo: filledData.logo,
         hours: {
           monday: {
             open: filledData.hours.monday.open,
             close:filledData.hours.monday.close
           },
           tuesday: {
-            open: filledData.hours.tuesday.open,
-            close:filledData.hours.tuesday.close
+            open: filledData.hours.tuesday.open || filledData.hours.monday.open,
+            close:filledData.hours.tuesday.close || filledData.hours.monday.close
           },
           wednesday: {
-            open: filledData.hours.wednesday.open,
-            close:filledData.hours.wednesday.close
+            open: filledData.hours.wednesday.open || filledData.hours.monday.open,
+            close:filledData.hours.wednesday.close || filledData.hours.monday.close
           },
           thursday: {
-            open: filledData.hours.thursday.open,
-            close:filledData.hours.thursday.close
+            open: filledData.hours.thursday.open || filledData.hours.monday.open,
+            close:filledData.hours.thursday.close || filledData.hours.monday.close
           },
           friday: {
-            open: filledData.hours.friday.open,
-            close:filledData.hours.friday.close
+            open: filledData.hours.friday.open || filledData.hours.monday.open,
+            close:filledData.hours.friday.close || filledData.hours.monday.close
           },
           saturday: {
-            open: filledData.hours.friday.open,
-            close:filledData.hours.friday.close
+            open: filledData.hours.friday.open || filledData.hours.monday.open,
+            close:filledData.hours.friday.close || filledData.hours.monday.close
           },
           sunday: {
-            open: filledData.hours.sunday.open,
-            close:filledData.hours.sunday.close
+            open: filledData.hours.sunday.open || filledData.hours.monday.open,
+            close:filledData.hours.sunday.close || filledData.hours.monday.close
           },
         }
       }}
@@ -259,6 +259,9 @@ const EditVenue = ({readOnly, id}) => {
               </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
+          {readOnly === "readOnly"
+          ? ""
+          : <> 
           <Form.Row>
             <Form.Group as={Col}>
               <Form.Label>Add a logo</Form.Label>
@@ -273,9 +276,7 @@ const EditVenue = ({readOnly, id}) => {
               />
             </Form.Group>
           </Form.Row>
-          {readOnly === "readOnly"
-          ? ""
-          : <> <Button variant="outline-secondary" onClick={resetForm}>Clear</Button>
+          <Button variant="outline-secondary" onClick={resetForm}>Clear</Button>
           <Button onClick={handleSubmit}>Update Venue</Button></>
          }
 

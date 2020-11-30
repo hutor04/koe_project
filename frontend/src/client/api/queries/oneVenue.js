@@ -8,6 +8,13 @@ const oneVenue = gql`
     city,
     country,
     postalCode},
+    logo {
+      path,
+      _id,
+      filename,
+      mimetype
+      encoding
+    },
   phoneNumber,
   maxCapacity, 
   hours {

@@ -14,14 +14,11 @@ export const allVenues = gql`
             venueType
             logo {
                 _id
-                filename
-                encoding
-                mimetype
             }
             address {
                 street
                 house
-            }
+            
             hours {
                 monday {
                     open
