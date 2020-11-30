@@ -140,7 +140,7 @@ const CreateVenue = () => {
                               weekday.map(day =>  (
                                 <Card className='col'>
                                   <Card.Header variant="primary">
-                                  {day}
+                                  {day.slice(0,3)}
                                   </Card.Header>
                                   <Card.Body>
                                     <Form.Row>
