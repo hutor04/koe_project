@@ -1,7 +1,8 @@
 import { gql } from '@apollo/client';
 
-const CREATE_VENUE = gql`    
-    mutation newVenue(
+const UPDATE_VENUE = gql`    
+    mutation updVenue(
+        $id: ID!
         $name: String!
         $address: AddressInput!
         $maxCapacity: Int!
@@ -9,7 +10,8 @@ const CREATE_VENUE = gql`
         $phoneNumber: String
         $logo: Upload
         $hours: HoursInput
-    ) {createVenue(
+    ) {updateVenue(
+        id: $id
         name: $name
         address: $address
         maxCapacity: $maxCapacity
@@ -29,4 +31,4 @@ const CREATE_VENUE = gql`
     }
 `;
 
-export default CREATE_VENUE;
+export default UPDATE_VENUE;
