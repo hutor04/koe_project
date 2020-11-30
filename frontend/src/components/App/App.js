@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense, lazy } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,17 +8,15 @@ import { ApolloProvider } from '@apollo/client';
 import { client } from '../../client';
 import { Container } from 'react-bootstrap';
 import NavBar from '../NavBar/NavBar';
-import PageHome from '../pages/Home/PageHome';
-import PageAbout from '../pages/About/PageAbout';
-import PageSignup from '../pages/PageSignup/PageSignup';
-import PageLogin from '../pages/Login/PageLogin';
-import PageProfile from '../pages/Profile/PageProfile';
-import PageAddVenue from '../pages/CreateVenue/PageAddVenue';
-
-import './app.scss';
 import Footer from '../Footer/Footer';
-import OpeningHours from '../VenueUpdates/OpeningHours';
-import EditVenue from '../VenueUpdates/EditVenue';
+import './app.scss';
+
+const PageAbout = lazy(() => import('../pages/About/PageAbout'));
+const PageSignup = lazy(() => import('../pages/PageSignup/PageSignup'));
+const PageProfile = lazy(() => import('../pages/Profile/PageProfile'));
+const PageLogin = lazy(() => import('../pages/Login/PageLogin'));
+const PageAddVenue = lazy(() => import('../pages/CreateVenue/PageAddVenue'));
+const PageHome = lazy(() => import('../pages/Home/PageHome'));
 
 function App() {
   return (
@@ -26,33 +24,28 @@ function App() {
       <Router>
         <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
           <NavBar />
-          <Switch>
-            <Route path="/about">
-              <PageAbout />
-            </Route>
-            <Route path="/login">
-              <PageLogin />
-            </Route>
-            <Route path="/signup">
-              <PageSignup />
-            </Route>
-            <Route path="/profile">
-              <PageProfile />
-            </Route>
-            <Route path="/add-venue">
-              <PageAddVenue />
-            </Route>
-            <Route path="/openingHours">
-              <OpeningHours />
-            </Route>
-            <Route path="/editVenue">
-              <EditVenue />
-            </Route>
-            <Route path="/">
-              <PageHome />
-            </Route>
-          </Switch>
-
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              <Route path="/about">
+                <PageAbout />
+              </Route>
+              <Route path="/login">
+                <PageLogin />
+              </Route>
+              <Route path="/signup">
+                <PageSignup />
+              </Route>
+              <Route path="/profile">
+                <PageProfile />
+              </Route>
+              <Route path="/add-venue">
+                <PageAddVenue />
+              </Route>
+              <Route path="/">
+                <PageHome />
+              </Route>
+            </Switch>
+          </Suspense>
           <Footer />
         </Container>
       </Router>

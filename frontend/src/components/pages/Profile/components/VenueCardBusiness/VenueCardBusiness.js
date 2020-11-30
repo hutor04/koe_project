@@ -4,7 +4,7 @@ import defaultLogo from '../../../../../imgs/default_logo.png';
 import DeleteVenue from '../../../../VenueUpdates/DeleteVenue';
 import EditVenue from '../../../../VenueUpdates/EditVenue';
 
-function VenueCardBusines({ id, logo, name, maxCapacity, street }) {
+function VenueCardBusines({ id, logo, name, maxCapacity, street, updateList }) {
   const [open, setOpen] = useState(false);
   const [editMode, setEditMode] = useState('readOnly');
   console.log(editMode, 'theEditMode');
@@ -45,7 +45,7 @@ function VenueCardBusines({ id, logo, name, maxCapacity, street }) {
             terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
             labore wes anderson cred nesciunt sapiente ea proident.
             <EditVenue readOnly={editMode} id={id}/>
-            <DeleteVenue id={id}/>
+            <DeleteVenue id={id} updateList={updateList}/>
           </div>
         </Container>
       </Collapse>
