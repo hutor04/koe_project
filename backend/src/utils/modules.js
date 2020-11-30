@@ -29,7 +29,7 @@ const makeExecutableSchemaFromModules = ({ modules }) => {
     typeDefs,
     resolvers,
     schemaDirectives: {
-      ...directives.schemadirectives,
+      ...directives.schemaDirectives,
     },
   });
 };
