@@ -7,8 +7,9 @@ function Counter({ id, maxCapacity }) {
     count: 0,
     badgeType: 'success',
   });
-  const countRef = fireBase.ref(`stores/${id}/visitors`);
+
   useEffect(() => {
+    const countRef = fireBase.ref(`stores/${id}/visitors`);
     countRef.on('value', function(snapshot) {
       const currentVal = snapshot.val();
       if (currentVal > maxCapacity * 0.9) {
@@ -30,7 +31,7 @@ function Counter({ id, maxCapacity }) {
         });
       }
     });
-  }, []);
+  }, [id, maxCapacity]);
   return (
     <Button variant={counter.badgeType}>
       <i className="fas fa-users"></i> <Badge variant="light">{counter.count}</Badge>
