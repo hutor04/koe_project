@@ -1,14 +1,13 @@
-import React, {useState} from "react";
+import React from "react";
 import {Form, Col, Container, Button, Alert, Accordion, Card} from 'react-bootstrap';
 import { useMutation, useQuery } from '@apollo/client';
 import { Formik, FieldArray } from "formik";
 import oneVenue from '../../client/api/queries/oneVenue';
-import CREATE_VENUE from '../../client/api/queries/createVenue';
+import UPDATE_VENUE from '../../client/api/queries/updateVenue';
 
 
-const EditVenue = ({id}) => {
-  const [createVenue, { loading, error, data}] = useMutation(CREATE_VENUE);
-  console.log('id', id)
+const EditVenue = ({readOnly, id}) => {
+  const [updateVenue, { loading, error, data}] = useMutation(UPDATE_VENUE);
   let filledData;
 
   let queryData = useQuery(oneVenue, {variables: {id: id}});
@@ -33,7 +32,8 @@ const EditVenue = ({id}) => {
         console.log(values);
         const vals = {...values};
         vals.maxCapacity = Number(values.maxCapacity);
-        createVenue({ variables: vals}).catch(err => console.log('top error', err));
+        vals.id= id
+        updateVenue({ variables: vals}).catch(err => console.log('top error', err));
         resetForm();
       }}
       initialValues={{
@@ -108,6 +108,8 @@ const EditVenue = ({id}) => {
             <Form.Group as={Col}>
               <Form.Label>Venue Name</Form.Label>
               <Form.Control
+              readOnly={readOnly} 
+                aria-disabled="false"
                 placeholder="Store name"
                 onChange={handleChange("name")}
                 value={values.name}
@@ -120,6 +122,7 @@ const EditVenue = ({id}) => {
             <Form.Group as={Col}>
               <Form.Label>Venue Type</Form.Label>
               <Form.Control
+              readOnly={readOnly}
                 as="select"
                 placeholder="Venue Type"
                 onChange={handleChange("venueType")}
@@ -138,6 +141,7 @@ const EditVenue = ({id}) => {
               <Form.Group as={Col}>
                 <Form.Label>Max Capacity</Form.Label>
                 <Form.Control
+                readOnly={readOnly}
                   placeholder="Max Capacity"
                   onChange={handleChange("maxCapacity")}
                   value={values.maxCapacity}
@@ -161,13 +165,14 @@ const EditVenue = ({id}) => {
                               weekday.map(day =>  (
                                 <Card className='col'>
                                   <Card.Header variant="primary">
-                                  {day}
+                                  {day.slice(0,3)}
                                   </Card.Header>
                                   <Card.Body>
                                     <Form.Row>
                                       <Form.Group as={Col}>
                                         <Form.Label>Open</Form.Label>
                                         <Form.Control
+                                        readOnly={readOnly}
                                         placeholder="Open"
                                         onChange={handleChange(`hours.${day}.open`)}
                                         value={values.hours[`${day}`]["open"]}
@@ -175,6 +180,7 @@ const EditVenue = ({id}) => {
                                         <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
                                         <Form.Label>Close</Form.Label>
                                         <Form.Control
+                                        readOnly={readOnly}
                                         placeholder="Close"
                                         onChange={handleChange(`hours.${day}.close`)}
                                         value={values.hours[`${day}`]["close"]}
@@ -195,6 +201,7 @@ const EditVenue = ({id}) => {
             <Form.Group as={Col}>
               <Form.Label>Phone number</Form.Label>
               <Form.Control
+              readOnly={readOnly}
                 placeholder="Phone number"
                 onChange={handleChange("phoneNumber")}
                 value={values.phoneNumber}
@@ -207,6 +214,7 @@ const EditVenue = ({id}) => {
             <Form.Group as={Col}>
               <Form.Label>Street Address</Form.Label>
               <Form.Control
+              readOnly={readOnly}
                 placeholder="Street Address"
                 onChange={handleChange("address.street")}
                 value={values.address.street}
@@ -219,6 +227,7 @@ const EditVenue = ({id}) => {
             <Form.Group as={Col}>
               <Form.Label>City</Form.Label>
               <Form.Control
+              readOnly={readOnly}
                 placeholder="City"
                 onChange={handleChange("address.city")}
                 value={values.address.city}
@@ -229,6 +238,7 @@ const EditVenue = ({id}) => {
             <Form.Group as={Col}>
               <Form.Label>Country</Form.Label>
               <Form.Control
+              readOnly={readOnly}
                 placeholder="Country"
                 onChange={handleChange('address.country')}
                 value={values.address.country}
@@ -239,6 +249,7 @@ const EditVenue = ({id}) => {
             <Form.Group as={Col}>
               <Form.Label>Postal code</Form.Label>
               <Form.Control
+              readOnly={readOnly}
                 placeholder="Postal code"
                 onChange={handleChange("address.postalCode")}
                 value={values.address.postalCode}
@@ -251,6 +262,7 @@ const EditVenue = ({id}) => {
             <Form.Group as={Col}>
               <Form.Label>Add a logo</Form.Label>
               <Form.Control
+              readOnly={readOnly}
                 placeholder="Image"
                 name={'logo'}
                 type={'file'}
@@ -260,8 +272,12 @@ const EditVenue = ({id}) => {
               />
             </Form.Group>
           </Form.Row>
-          <Button variant="outline-secondary" onClick={resetForm}>Clear</Button>{' '}
-          <Button onClick={handleSubmit}>Add New Venue</Button>
+          {readOnly === "readOnly"
+          ? ""
+          : <> <Button variant="outline-secondary" onClick={resetForm}>Clear</Button>
+          <Button onClick={handleSubmit}>Update Venue</Button></>
+         }
+
         </Form>
       )}
     </Formik>
