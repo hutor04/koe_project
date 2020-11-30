@@ -85,19 +85,25 @@ export const logInUser = ({ email, password }) => (async (dispatch, getState) =>
 });
 
 export const restoreSession = () => (async (dispatch, getState) => {
-  console.log('aaa');
   const fetch = createApolloFetch({
     uri: config.api,
   });
+
+  fetch.use(({ request, options }, next) => {
+    if (!options.headers) {
+      options.headers = {};  // Create the headers object if needed.
+    }
+    options.headers['x-token'] = localStorage.getItem('token');
+    next();
+  });
+
   fetch({ query: me })
     .then(resp => {
       const data = resp.data.me;
-      console.log(resp);
-      // dispatch(profileLoaded(data));
+      dispatch(profileLoaded({ user: data }));
     })
     .catch(err => {
       dispatch(loadError());
-      console.log(err);
     });
 });
 

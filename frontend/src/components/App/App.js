@@ -1,14 +1,14 @@
-import React, {useEffect, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ApolloProvider } from '@apollo/client';
 import { client } from '../../client';
 import { Container, Spinner } from 'react-bootstrap';
-import { restoreSession } from '../pages/Login/userStatusSlice';
+import { restoreSession, selectLoggedIn } from '../pages/Login/userStatusSlice';
 import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
 import './app.scss';
@@ -22,9 +22,10 @@ const PageHome = lazy(() => import('../pages/Home/PageHome'));
 
 function App() {
   const dispatch = useDispatch();
-  useEffect(() =>{
+  const userLoggedIn = useSelector(selectLoggedIn);
+  if (localStorage.getItem('token') && !userLoggedIn) {
     dispatch(restoreSession());
-  }, [])
+  }
   return (
     <ApolloProvider client={client}>
       <Router>

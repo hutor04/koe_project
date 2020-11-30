@@ -12,7 +12,6 @@ class IsAuthenticatedDirective extends SchemaDirectiveVisitor {
     // eslint-disable-next-line no-param-reassign
     field.resolve = async (...args) => {
       const context = args[2];
-      console.log(context);
       if (!context || !context.user) {
         throw new AuthenticationError('Not allowed');
       }
