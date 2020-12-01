@@ -19,6 +19,7 @@ const PageProfile = lazy(() => import('../pages/Profile/PageProfile'));
 const PageLogin = lazy(() => import('../pages/Login/PageLogin'));
 const PageAddVenue = lazy(() => import('../pages/CreateVenue/PageAddVenue'));
 const PageHome = lazy(() => import('../pages/Home/PageHome'));
+const CounterPage = lazy(() => import('../pages/Counter/CounterPage'))
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,9 @@ function App() {
               </Route>
               <Route path="/profile">
                 <PageProfile />
+              </Route>
+              <Route path="/counter/:id">
+                <CounterPage />
               </Route>
               <Route path="/add-venue">
                 <PageAddVenue />
