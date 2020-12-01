@@ -9,9 +9,8 @@ function PageAbout() {
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
-  return ( 
-    
-    <Container>
+  return (
+    <Container style={{minHeight: '85vh'}}>
         <br/>
         <animated.div style={props}>
             <Container className="p-3 mb-2 bg-dark text-white">
@@ -34,7 +33,7 @@ function PageAbout() {
               <h2>COVID 19 SAFETY</h2>
               <hr class="my-4"></hr>
               <p>
-              Ensure optimal crowd management and social distancing in your establishment, thanks to our 
+              Ensure optimal crowd management and social distancing in your establishment, thanks to our
                 advanced livestream feed
               </p>
             </Container>
@@ -53,7 +52,7 @@ function PageAbout() {
           </Carousel.Item>
         </Carousel>
           </Container>
-          
+
         </animated.div>
     </Container>
   );
