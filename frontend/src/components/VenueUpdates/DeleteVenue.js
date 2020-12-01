@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useMutation, useApolloClient } from '@apollo/client';
-import {Alert, Button, ButtonGroup } from 'react-bootstrap';
+import {Alert, Button, ButtonGroup, Col, Row } from 'react-bootstrap';
 import DELETE_VENUE from '../../client/api/queries/deleteVenue';
 import ownVenues from '../../client/api/queries/own-venues'
 
@@ -22,20 +22,29 @@ const  DeleteVenue = ({ id }) => {
       .catch(err => console.log(err));
   }
   return (
-    <ButtonGroup>
-      <Alert show={show} variant="danger">
-        Are you sure you want to delete this venue?
-        <div className="d-flex justify-content-end">
-          <Button onClick={() => setShow(false)} variant="outline-secondary">
-            No
-          </Button>
-          <Button onClick={clickHandler} variant="danger">
-            Delete
-          </Button>
-        </div>
-      </Alert>
-      {!show && <Button onClick={() => setShow(true)}>Delete</Button>}
-    </ButtonGroup>
+    <Col>
+      <ButtonGroup className="float-right">
+        <Alert show={show} variant="danger">
+          <p>Are you sure you want to delete this venue?</p>
+          <div className="d-flex justify-content-end">
+            <Row>
+              <Col>
+              <Button onClick={() => setShow(false)} variant="outline-secondary">
+                No
+              </Button>
+              </Col>
+              <Col>
+              <Button onClick={clickHandler} variant="danger">
+                Delete
+              </Button>
+              </Col>
+            </Row>
+          </div>
+        </Alert>
+        {!show && <Button variant="outline-danger" onClick={() => setShow(true)}>Delete</Button>}
+        <br/>
+      </ButtonGroup>
+    </Col>
   );
 }
 

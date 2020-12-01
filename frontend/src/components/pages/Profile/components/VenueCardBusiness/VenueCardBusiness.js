@@ -50,8 +50,12 @@ function VenueCardBusines({ id, logo, name, maxCapacity, street }) {
             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
             terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
             labore wes anderson cred nesciunt sapiente ea proident.
+            <Container>
             <EditVenue readOnly={editMode} id={id}/>
             <DeleteVenue id={id}/>
+            <br/>
+            </Container>
+            <br/>
           </div>
         </Container>
       </Collapse>
