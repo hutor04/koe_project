@@ -26,32 +26,32 @@ function CounterPage() {
     }
   }, []);
   return (
-    <Container style={{ minHeight: '83vh' }}>
-      <Row>
+    <Container style={{ minHeight: '83vh' }} className={'d-flex flex-column'}>
+      <Container className={'d-flex flex-row'}>
         <h1>{name}</h1>
-      </Row>
-      <Row>
-        <Col>
+      </Container>
+      <Container className={'d-flex flex-column justify-content-around'} fluid>
+        <Container className={'d-flex flex-row justify-content-center mb-5'}>
+          <div style={{ fontSize: "6em"}}>{counter}</div>
+        </Container>
+        <Container className={'d-flex flex-row justify-content-around mb-5'}>
+          <CounterButton id={id} delta='decrement'/>
+
+          <CounterButton id={id} delta='increment'/>
+        </Container>
+        <Container className={'d-flex flex-row justify-content-center'}>
           <Button
-            variant="light"
+            variant="light btn-lg"
+            className={'mr-4'}
             onClick={() => {history.goBack()}}
           >Back</Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <CounterButton id={id} delta='decrement'/>
-        </Col>
-        <Col>{counter}</Col>
-        <Col>
-          <CounterButton id={id} delta='increment'/>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <CounterButton id={id} delta='reset'/>
-        </Col>
-      </Row>
+          <CounterButton
+            id={id}
+            delta='reset'
+          />
+        </Container>
+      </Container>
+
     </Container>
   );
 

@@ -5,11 +5,23 @@ import COUNTER from '../../client/api/queries/counter';
 
 const CounterButton = ({id, delta}) => {
   const [updateVenueCounter] = useMutation(COUNTER);
-  console.log(id, delta)
+  let btnVar;
+  let btnContent;
+  if (delta === 'increment') {
+    btnVar = 'outline-danger btn-lg';
+    btnContent = <i className="fas fa-plus fa-5x"></i>
+  } else if (delta === 'decrement') {
+    btnVar = 'outline-info btn-lg';
+    btnContent = <i className="fas fa-minus fa-5x"></i>;
+  } else {
+    btnVar = 'secondary btn-lg';
+    btnContent = 'Reset'
+  }
+
   return (
     <ButtonGroup>
       <Button
-        variant = {delta==='increment'? "outline-danger": delta==="decrement"? "outline-info":"secondary"}
+        variant = {btnVar}
         value={delta}
         required
         onClick={e => {
@@ -17,10 +29,10 @@ const CounterButton = ({id, delta}) => {
             id: id,
             delta: delta
           };
-          updateVenueCounter({ variables: vars }).then(data => console.log(data)).catch(err => console.log(err));
+          updateVenueCounter({ variables: vars }).catch(err => console.log(err));
         }}
       >
-        {delta==='increment'? "+": delta==="decrement"?"-":"reset"}
+        {btnContent}
       </Button>
     </ButtonGroup>
   );
