@@ -11,12 +11,12 @@ function PageAbout() {
   };
   return ( 
     
-    <Container>
+    <Container style={{minHeight: "83vh"}}>
         <br/>
         <animated.div style={props}>
             <Container className="p-3 mb-2 bg-dark text-white">
           <Carousel activeIndex={index} onSelect={handleSelect}>
-          <Carousel.Item as={Container}>
+          <Carousel.Item as={Container} style={{minHeight: "50vh"}}>
             <Jumbotron className="bg-dark text-center">
             <Container>
               <h1>About Us</h1>
@@ -27,7 +27,7 @@ function PageAbout() {
             </Container>
             </Jumbotron>
           </Carousel.Item>
-          <Carousel.Item>
+          <Carousel.Item style={{minHeight: "50vh"}}>
           <Jumbotron className="bg-dark text-center">
             <Container>
               <h1>MONITOR OCCUPANT DENSITY</h1>
@@ -40,7 +40,7 @@ function PageAbout() {
             </Container>
           </Jumbotron>
           </Carousel.Item>
-          <Carousel.Item>
+          <Carousel.Item style={{minHeight: "50vh"}}>
           <Jumbotron className="bg-dark text-center">
             <Container>
             <h1>Our Team</h1>

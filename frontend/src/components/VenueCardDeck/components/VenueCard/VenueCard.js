@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Card, Image, Container, Collapse, Button, ButtonGroup } from 'react-bootstrap';
+import { Card, Image, Container, Collapse, Button, ButtonGroup, Table } from 'react-bootstrap';
 import Counter from '../Counter/Counter';
 import defaultLogo from '../../../../imgs/default_logo.png';
 import {useSpring, animated} from 'react-spring'
@@ -31,9 +31,48 @@ function VenueCard({ id, logo, name, maxCapacity, street }) {
         <Collapse in={open}>
           <Container>
             <div >
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-              terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-              labore wes anderson cred nesciunt sapiente ea proident.
+              <h5>Opening Hours</h5>
+              <Container>
+              <Table>
+                <tbody>
+                  <tr>
+                    <td>Monday</td>
+                    <td>8:00</td>
+                    <td>23:00</td>
+                  </tr>
+                  <tr>
+                    <td>Tuesday</td>
+                    <td>8:00</td>
+                    <td>23:00</td>
+                  </tr>
+                      <tr>
+                    <td>Wednesday</td>
+                    <td>8:00</td>
+                    <td>23:00</td>
+                  </tr>
+                      <tr>
+                    <td>Thursday</td>
+                    <td>8:00</td>
+                    <td>23:00</td>
+                  </tr>
+                      <tr>
+                    <td>Friday</td>
+                    <td>8:00</td>
+                    <td>23:00</td>
+                  </tr>
+                      <tr>
+                    <td>Saturday</td>
+                    <td>8:00</td>
+                    <td>23:00</td>
+                  </tr>
+                  <tr>
+                    <td>Sunday</td>
+                    <td colSpan="2">closed</td>
+                  </tr>
+                </tbody>
+              </Table>
+
+              </Container>
             </div>
           </Container>
         </Collapse>

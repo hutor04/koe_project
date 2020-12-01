@@ -9,7 +9,7 @@ function PageHome() {
 
   return (
     <animated.div style={props}>
-      <Container>
+      <Container style={{minHeight: "83vh"}}>
         <Row>
           <Col>
             <h1>Explore Queues</h1>
