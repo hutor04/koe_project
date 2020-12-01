@@ -14,7 +14,7 @@ function UserProfileCard() {
         <Card.Text>
           <i className="far fa-envelope"></i> Email: {user.email}
         </Card.Text>
-        <Button variant="primary">Edit Profile</Button>
+        <Button variant="outline-primary">Edit Profile</Button>
       </Card.Body>
     </Card>
   );
