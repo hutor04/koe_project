@@ -1,18 +1,40 @@
 import React, {useState} from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useApolloClient, gql } from '@apollo/client';
 import {Alert, Button, ButtonGroup } from 'react-bootstrap';
 import DELETE_VENUE from '../../client/api/queries/deleteVenue';
 
-const  DeleteVenue = ({id, updateList}) => {
+const  DeleteVenue = ({ id }) => {
   const [deleteVenue] = useMutation(DELETE_VENUE);
   const [show, setShow] = useState(false);
+  const client = useApolloClient();
 
   const clickHandler = e => {
     const vars = {
       id: id,
     };
+    const ownVenues = gql`
+        query ListOwnVenues {
+            listOwnVenues
+            {
+                id
+                name
+                logo {
+                    _id
+                }
+                address{
+                    street
+                }
+                maxCapacity
+                venueType
+            }
+        }
+    `;
     deleteVenue({ variables: vars })
-      .then(() => updateList())
+      .then(() => {
+        const { listOwnVenues } = client.readQuery({query: ownVenues});
+        const filteredList = listOwnVenues.filter(el => el.id !== id);
+        client.writeQuery({query: ownVenues, data: {listOwnVenues: [...filteredList]}});
+      })
       .catch(err => console.log(err));
   }
   return (
