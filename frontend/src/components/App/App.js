@@ -12,6 +12,7 @@ import { restoreSession, selectLoggedIn } from '../pages/Login/userStatusSlice';
 import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
 import './app.scss';
+import CouterPage from '../pages/Counter/CouterPage';
 
 const PageAbout = lazy(() => import('../pages/About/PageAbout'));
 const PageSignup = lazy(() => import('../pages/PageSignup/PageSignup'));
@@ -44,6 +45,9 @@ function App() {
               </Route>
               <Route path="/profile">
                 <PageProfile />
+              </Route>
+              <Route path="/counter/:id">
+                <CouterPage />
               </Route>
               <Route path="/add-venue">
                 <PageAddVenue />

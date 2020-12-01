@@ -17,6 +17,7 @@ function VenueCardBusines({ id, logo, name, maxCapacity, street, updateList }) {
           <Card.Subtitle className="mb-2 text-muted">{street}</Card.Subtitle>
         </Container>
         <Button
+          href={`/counter/${id}`}
           variant={'light'}
           className={'mr-2'}>
             <i className="fas fa-stopwatch-20"></i></Button>
