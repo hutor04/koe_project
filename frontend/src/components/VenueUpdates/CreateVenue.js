@@ -1,12 +1,13 @@
 import React from "react";
 import {Form, Col, Container, Button, Alert, Accordion, Card} from 'react-bootstrap';
-import { useMutation } from '@apollo/client';
+import { useMutation, useApolloClient } from '@apollo/client';
 import { Formik, FieldArray } from "formik";
 import CREATE_VENUE from '../../client/api/queries/createVenue';
-
+import ownVenues from '../../client/api/queries/own-venues'
 
 const CreateVenue = () => {
   const [createVenue, { loading, error, data}] = useMutation(CREATE_VENUE);
+  const client = useApolloClient();
   const weekday = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
   if (loading) {
     return <p>Loading...</p>
@@ -15,10 +16,17 @@ const CreateVenue = () => {
   <Container>
     <Formik
       onSubmit={(values, {resetForm}) => {
-        console.log(values.logo, "!!CREATE VENUE!!");
         const vals = {...values};
         vals.maxCapacity = Number(values.maxCapacity);
-        createVenue({ variables: vals}).catch(err => console.log('top error', err));
+        createVenue({ variables: vals})
+          .then((resp) => {
+            const venues = client.readQuery({query: ownVenues});
+            if (venues) {
+              let updatedList = [...venues.listOwnVenues, resp.data.createVenue];
+              client.writeQuery({query: ownVenues, data: {listOwnVenues: updatedList}});
+            }
+          })
+          .catch(err => console.log('top error', err));
         resetForm();
       }}
       initialValues={{
@@ -159,7 +167,7 @@ const CreateVenue = () => {
                                         value={values.hours[`${day}`]["close"]}
                                         />
                                         <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
-                                      </Form.Group>   
+                                      </Form.Group>
                                     </Form.Row>
                                   </Card.Body>
                                 </Card>))

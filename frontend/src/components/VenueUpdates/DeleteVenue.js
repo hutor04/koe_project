@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import { useMutation, useApolloClient, gql } from '@apollo/client';
+import { useMutation, useApolloClient } from '@apollo/client';
 import {Alert, Button, ButtonGroup } from 'react-bootstrap';
 import DELETE_VENUE from '../../client/api/queries/deleteVenue';
+import ownVenues from '../../client/api/queries/own-venues'
 
 const  DeleteVenue = ({ id }) => {
   const [deleteVenue] = useMutation(DELETE_VENUE);
@@ -12,23 +13,6 @@ const  DeleteVenue = ({ id }) => {
     const vars = {
       id: id,
     };
-    const ownVenues = gql`
-        query ListOwnVenues {
-            listOwnVenues
-            {
-                id
-                name
-                logo {
-                    _id
-                }
-                address{
-                    street
-                }
-                maxCapacity
-                venueType
-            }
-        }
-    `;
     deleteVenue({ variables: vars })
       .then(() => {
         const { listOwnVenues } = client.readQuery({query: ownVenues});

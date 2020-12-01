@@ -20,6 +20,8 @@ const CREATE_VENUE = gql`
     ){
         id
         name
+        logo { _id
+        }
         address {
             city
             street
