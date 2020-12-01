@@ -7,8 +7,8 @@ function PageAbout() {
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
-  return ( 
-    <Container>
+  return (
+    <Container style={{ minHeight: '83vh' }}>
         <br/>
       <Container className="p-3 mb-2 bg-dark text-white">
       <Carousel activeIndex={index} onSelect={handleSelect}>
@@ -31,7 +31,7 @@ function PageAbout() {
           <hr class="my-4"></hr>
 
           <p>
-          Ensure optimal crowd management and social distancing in your establishment, thanks to our 
+          Ensure optimal crowd management and social distancing in your establishment, thanks to our
             advanced livestream feed
           </p>
         </Container>

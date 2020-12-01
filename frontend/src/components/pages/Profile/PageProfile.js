@@ -6,7 +6,7 @@ import VenueCardDeckBusiness from './components/VenueCardDeckBusiness/VenueCardD
 
 function PageProfile() {
   return (
-    <Container className={'min-vh-100'} fluid>
+    <Container style={{ minHeight: '83vh' }} fluid>
       <Row className={'mt-5'}>
         <Col md={'auto'}>
           <UserprofileCard />

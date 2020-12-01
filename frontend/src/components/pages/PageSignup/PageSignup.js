@@ -4,7 +4,7 @@ import SignupForm from './components/SignupForm/SignupForm';
 
 function PageSignup() {
   return (
-    <Container>
+    <Container style={{ minHeight: '83vh' }}>
       <Row>
         <Col>
           <SignupForm />

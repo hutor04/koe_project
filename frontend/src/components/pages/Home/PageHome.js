@@ -4,7 +4,7 @@ import {Col, Container, Row} from "react-bootstrap";
 
 function PageHome() {
   return (
-    <Container>
+    <Container style={{ minHeight: '83vh' }}>
       <Row>
         <Col>
           <h1>Explore Queues</h1>

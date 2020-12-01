@@ -30,7 +30,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
+        <Container fluid style={{ paddingLeft: 0, paddingRight: 0}}>
           <NavBar />
           <Suspense fallback={<Spinner animation="border" />}>
             <Switch>

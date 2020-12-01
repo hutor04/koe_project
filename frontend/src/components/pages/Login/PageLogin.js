@@ -13,7 +13,7 @@ function PageLogin() {
     );
   }
   return (
-    <Container>
+    <Container style={{ minHeight: '83vh' }}>
       <Row>
         <Col>
           <LoginForm />
