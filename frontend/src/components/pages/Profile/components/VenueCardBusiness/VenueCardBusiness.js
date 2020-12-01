@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Image, Container, Collapse, Button, Accordion } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import defaultLogo from '../../../../../imgs/default_logo.png';
 import DeleteVenue from '../../../../VenueUpdates/DeleteVenue';
 import EditVenue from '../../../../VenueUpdates/EditVenue';
@@ -17,7 +18,14 @@ function VenueCardBusines({ id, logo, name, maxCapacity, street }) {
           <Card.Subtitle className="mb-2 text-muted">{street}</Card.Subtitle>
         </Container>
         <Button
-          href={`/counter/${id}`}
+          as={Link}
+          to={{
+            pathname: '/counter',
+            state: {
+              id: id,
+              name: name,
+            }
+          }}
           variant={'light'}
           className={'mr-2'}>
             <i className="fas fa-stopwatch-20"></i></Button>

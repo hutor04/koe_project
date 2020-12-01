@@ -1,45 +1,62 @@
-import { useQuery } from '@apollo/client';
-import React from 'react'
-import { Row } from 'react-bootstrap'
-import { useParams } from 'react-router-dom';
-import ownVenues from '../../../client/api/queries/own-venues';
+import React, { useEffect, useState } from 'react'
+import { Container, Row, Col, Button } from 'react-bootstrap'
+import { useLocation, useHistory } from 'react-router-dom';
+import { fireBase } from '../../../client';
 import CounterButton from '../../Counter/CounterButton'
-import Counter from '../../VenueCardDeck/components/Counter/Counter'
 
 function CounterPage() {
-  const { loading, error, data } = useQuery(ownVenues);
-  let { id } = useParams();
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  const [counter, setCounter] = useState(0);
+  const location = useLocation();
+  const history = useHistory();
+  const {id, name } = location.state;
 
-  const vl = data.listOwnVenues.map((venue) => {
-    if(id === venue.id) {
-         return (
-      <>
-      <Row key={venue.id} xs={1} style={{height: "25vh"}}>
-        <CounterButton id={venue.id} delta='increment'/>        
-      </Row>
-      <Row key={Math.random()} className="justify-content-md-center" style={{height: "15vh", widht: "40%"}}>
-        <div>{venue.name}</div>
-        <Counter id={venue.id} maxCapacity={venue.maxCapacity}/>        
-      </Row>
-      <Row key={Math.random()} xs={1} style={{height: "25vh"}}>
-        <CounterButton id={venue.id} delta='decrement'/>
-      </Row>
-      <Row key={Math.random()} className="justify-content-md-center" style={{height: "15vh"}}>
-        <CounterButton id={venue.id} delta='reset'/>
-      </Row>
-      </>
-    ) 
+
+  useEffect(() => {
+    let mount = true;
+    const countRef = fireBase.ref(`stores/${id}/visitors`);
+    if (mount) {
+      countRef.on('value', function(snapshot) {
+        const currentVal = snapshot.val();
+        setCounter(currentVal);
+      });
     }
+    return function cleanup() {
+      countRef.off();
+      mount = false;
+    }
+  }, []);
+  return (
+    <Container style={{ minHeight: '83vh' }}>
+      <Row>
+        <h1>{name}</h1>
+      </Row>
+      <Row>
+        <Col>
+          <Button
+            variant="light"
+            onClick={() => {history.goBack()}}
+          >Back</Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <CounterButton id={id} delta='decrement'/>
+        </Col>
+        <Col>{counter}</Col>
+        <Col>
+          <CounterButton id={id} delta='increment'/>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <CounterButton id={id} delta='reset'/>
+        </Col>
+      </Row>
+    </Container>
+  );
 
-  })
 
-  return(
-    <div>
-      {vl}
-    </div>
-  )
+
 }
 
 export default CounterPage;

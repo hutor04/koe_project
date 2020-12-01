@@ -46,7 +46,7 @@ function App() {
               <Route path="/profile">
                 <PageProfile />
               </Route>
-              <Route path="/counter/:id">
+              <Route path="/counter">
                 <CounterPage />
               </Route>
               <Route path="/add-venue">
