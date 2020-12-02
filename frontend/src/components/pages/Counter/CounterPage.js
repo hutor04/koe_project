@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col, Button, Card } from 'react-bootstrap'
 import { useLocation, useHistory } from 'react-router-dom';
 import { fireBase } from '../../../client';
 import CounterButton from '../../Counter/CounterButton'
@@ -25,32 +25,37 @@ function CounterPage() {
       mount = false;
     }
   }, []);
+  
   return (
-    <Container style={{ minHeight: '83vh' }} className={'d-flex flex-column'}>
-      <Container className={'d-flex flex-row'}>
+    <Container style={{ minHeight: '83vh' }} className={'flex-column'}>
+      <br/>
+      <Container className={'flex-row'}>
+        <Card style= {{boxShadow: "1px 3px 1px #9E9E9E"}}>
         <h1>{name}</h1>
+        <Container className={'d-flex flex-column justify-content-around'} fluid>
+          <Container className={'d-flex flex-row justify-content-center'}>
+            <div style={{ fontSize: "6em"}}>{counter}</div>
+          </Container>
+          <Container className={'d-flex flex-row justify-content-around'}>
+            <CounterButton id={id} delta='decrement'/>
+            <CounterButton id={id} delta='increment'/>
+          </Container>
+          <Container className={'d-flex flex-row justify-content-center'}>
+            <Button
+              variant="outline-dark btn-lg"
+              className={'mr-4'}
+              onClick={() => {history.goBack()}}
+            >Back</Button>
+            <CounterButton
+              id={id}
+              delta='reset'
+            />
+        </Container>
+        <br/>
       </Container>
-      <Container className={'d-flex flex-column justify-content-around'} fluid>
-        <Container className={'d-flex flex-row justify-content-center mb-5'}>
-          <div style={{ fontSize: "6em"}}>{counter}</div>
+          
+        </Card>
         </Container>
-        <Container className={'d-flex flex-row justify-content-around mb-5'}>
-          <CounterButton id={id} delta='decrement'/>
-
-          <CounterButton id={id} delta='increment'/>
-        </Container>
-        <Container className={'d-flex flex-row justify-content-center'}>
-          <Button
-            variant="light btn-lg"
-            className={'mr-4'}
-            onClick={() => {history.goBack()}}
-          >Back</Button>
-          <CounterButton
-            id={id}
-            delta='reset'
-          />
-        </Container>
-      </Container>
 
     </Container>
   );
