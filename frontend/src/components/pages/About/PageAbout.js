@@ -34,7 +34,7 @@ function PageAbout() {
               <h2>COVID 19 SAFETY</h2>
               <hr class="my-4"></hr>
               <p>
-              Ensure optimal crowd management and social distancing in your establishment, thanks to our 
+              Ensure optimal crowd management and social distancing in your establishment, thanks to our
                 advanced livestream feed
               </p>
             </Container>
@@ -53,7 +53,7 @@ function PageAbout() {
           </Carousel.Item>
         </Carousel>
           </Container>
-          
+
         </animated.div>
     </Container>
   );
