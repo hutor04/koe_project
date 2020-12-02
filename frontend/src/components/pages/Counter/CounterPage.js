@@ -31,7 +31,7 @@ function CounterPage() {
       <br/>
       <Container className={'flex-row'}>
         <Card style= {{boxShadow: "1px 3px 1px #9E9E9E"}}>
-        <h1>{name}</h1>
+        <h1 style={{textAlign: "center"}}>{name}</h1>
         <Container className={'d-flex flex-column justify-content-around'} fluid>
           <Container className={'d-flex flex-row justify-content-center'}>
             <div style={{ fontSize: "6em"}}>{counter}</div>
@@ -40,17 +40,19 @@ function CounterPage() {
             <CounterButton id={id} delta='decrement'/>
             <CounterButton id={id} delta='increment'/>
           </Container>
-          <Container className={'d-flex flex-row justify-content-center'}>
-            <Button
-              variant="outline-dark btn-lg"
-              className={'mr-4'}
-              onClick={() => {history.goBack()}}
-            >Back</Button>
-            <CounterButton
-              id={id}
-              delta='reset'
-            />
-        </Container>
+          <br/>
+            <Container className={'d-flex flex-row justify-content-center'}>
+              <Button
+                variant="outline-dark btn-lg"
+                className={'mr-4'}
+                onClick={() => {history.goBack()}}
+              >Back</Button>
+              <CounterButton
+                id={id}
+                delta='reset'
+              />
+          </Container>
+          <br/>
         <br/>
       </Container>
           

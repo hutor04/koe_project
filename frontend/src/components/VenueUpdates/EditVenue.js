@@ -277,7 +277,7 @@ const EditVenue = ({readOnly, id}) => {
             </Form.Group>
           </Form.Row>
           <Form.Row>
-              <Button variant="outline-secondary" onClick={resetForm}>Clear</Button>
+              <Button className="mr-2" variant="outline-secondary" onClick={resetForm}>Clear</Button>
               <Button onClick={handleSubmit}>Update Venue</Button>
           </Form.Row>
           </>
