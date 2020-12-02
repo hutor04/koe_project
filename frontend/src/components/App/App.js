@@ -12,6 +12,7 @@ import { restoreSession, selectLoggedIn } from '../pages/Login/userStatusSlice';
 import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
 import './app.scss';
+import {useSpring, animated} from 'react-spring'
 
 const PageAbout = lazy(() => import('../pages/About/PageAbout'));
 const PageSignup = lazy(() => import('../pages/PageSignup/PageSignup'));
@@ -23,6 +24,7 @@ const CounterPage = lazy(() => import('../pages/Counter/CounterPage'))
 
 function App() {
   const dispatch = useDispatch();
+  const slideprops= useSpring({opacity: 1, marginTop:0, from: {opacity: 0, marginTop:500 }})
   const userLoggedIn = useSelector(selectLoggedIn);
   if (localStorage.getItem('token') && !userLoggedIn) {
     dispatch(restoreSession());
@@ -50,7 +52,9 @@ function App() {
                 <CounterPage />
               </Route>
               <Route path="/add-venue">
+              <animated.div style={slideprops}>
                 <PageAddVenue />
+              </animated.div>
               </Route>
               <Route path="/">
                 <PageHome />

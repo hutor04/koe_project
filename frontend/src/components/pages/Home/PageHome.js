@@ -12,7 +12,7 @@ function PageHome() {
       <Container style={{minHeight: "83vh"}}>
         <Row>
           <Col>
-            <h1>Explore Queues</h1>
+            <h1 style={{textAlign: "center", marginTop: "2vh", marginBottom: "2vh"}}>Explore Queues</h1>
           </Col>
         </Row>
         <Row>

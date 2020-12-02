@@ -17,9 +17,9 @@ const FilterForm = () => {
     },
   });
   return (
-      <Container className={'p-0'}>
+      <Container>
         <Form onSubmit={formik.handleSubmit}>
-          <Form.Row className="align-items-center">
+          <Form.Row >
             <Col sm={3} className="my-1">
               <Form.Control
                 id="venue-name"
@@ -57,11 +57,11 @@ const FilterForm = () => {
               </Form.Control>
             </Col>
             <Col xs="auto" className="my-1">
-              <Button className={'mr-2'} variant={'info'} type="submit">Filter <i className="fas fa-filter"></i></Button>
+              <Button className={'mr-2 color-filter'} type="submit">Filter <i className="fas fa-filter"></i></Button>
               <Button variant={'light'} onClick={() => {
                 formik.resetForm();
                 dispatch(resetFilter())
-              }}>Rest <i className="fas fa-times"></i></Button>
+              }}>Reset <i className="fas fa-times"></i></Button>
             </Col>
           </Form.Row>
         </Form>

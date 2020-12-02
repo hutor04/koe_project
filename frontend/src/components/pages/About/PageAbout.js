@@ -5,6 +5,7 @@ import {useSpring, animated} from 'react-spring'
 function PageAbout() {
   const [index, setIndex] = useState(0);
   const props = useSpring({opacity: 1, marginTop:0, from: {opacity: 0, marginTop:-500}})
+  const styles= {"background-color":"#151E3D"}
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -14,10 +15,10 @@ function PageAbout() {
     <Container style={{minHeight: "83vh"}}>
         <br/>
         <animated.div style={props}>
-            <Container className="p-3 mb-2 bg-dark text-white">
+            <Container style={styles} className="p-3 mb-2 text-white">
           <Carousel activeIndex={index} onSelect={handleSelect}>
           <Carousel.Item as={Container} style={{minHeight: "50vh"}}>
-            <Jumbotron className="bg-dark text-center">
+            <Jumbotron style={styles} className="text-center">
             <Container>
               <h1>About Us</h1>
               <hr class="my-4"></hr>
@@ -28,7 +29,7 @@ function PageAbout() {
             </Jumbotron>
           </Carousel.Item>
           <Carousel.Item style={{minHeight: "50vh"}}>
-          <Jumbotron className="bg-dark text-center">
+          <Jumbotron style={styles} className="text-center">
             <Container>
               <h1>MONITOR OCCUPANT DENSITY</h1>
               <h2>COVID 19 SAFETY</h2>
@@ -41,7 +42,7 @@ function PageAbout() {
           </Jumbotron>
           </Carousel.Item>
           <Carousel.Item style={{minHeight: "50vh"}}>
-          <Jumbotron className="bg-dark text-center">
+          <Jumbotron style={styles} className="text-center">
             <Container>
             <h1>Our Team</h1>
               <hr class="my-4"></hr>

@@ -3,7 +3,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 function Footer(){
   return (
-    <Navbar bg="dark" variant="dark" className={'justify-content-center mt-2'}>
+    <Navbar variant="dark" className={'justify-content-center mt-2 color-footer'}>
       <Nav>
         <Nav.Link href="https://github.com/hutor04/koe_project">
           CyberDucks <i className="fab fa-github-square"></i>

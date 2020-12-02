@@ -42,7 +42,6 @@ const  DeleteVenue = ({ id }) => {
           </div>
         </Alert>
         {!show && <Button variant="outline-danger" onClick={() => setShow(true)}>Delete</Button>}
-        <br/>
       </ButtonGroup>
     </Col>
   );

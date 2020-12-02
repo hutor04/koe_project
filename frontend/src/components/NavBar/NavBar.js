@@ -26,7 +26,7 @@ function NavBar(){
   }
 
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar variant="dark" className="color-nav">
       <Navbar.Brand as={Link} to='/'>
         <img
           alt=""
