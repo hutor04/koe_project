@@ -8,4 +8,5 @@ Our app was created  using the following tech stack-
 - Apollo Server
 - Express
 
-Our team is  Eugene Hutornuk, Morten Bergseng, and Na Wei, and our application can be found at https://fierce-retreat-29938.herokuapp.com/index.html
+Our team is  Eugene Hutornuk, Morten Bergseng, and Na Wei, and our application can be found at:
+https://fierce-retreat-29938.herokuapp.com/index.html
